@@ -62,6 +62,7 @@ html {
 
   .header a:hover {
     color: #4D00FF;
+    transform: scale(1.2);
   }
   
   
@@ -138,4 +139,5 @@ html {
     font-weight: normal;
     font-style: italic;
   }
+
   
