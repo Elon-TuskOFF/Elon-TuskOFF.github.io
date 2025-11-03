@@ -45,6 +45,7 @@ html {
     background-color: #fff;
     font-size: 14px;
     font-weight: 900;
+    justify-content: center;
   }
   
   .header li {
@@ -141,3 +142,4 @@ html {
   }
 
   
+
