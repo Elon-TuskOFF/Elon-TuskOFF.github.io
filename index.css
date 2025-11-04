@@ -67,7 +67,10 @@ html {
     color: #4D00FF;
     transform: scale(1.2);
   }
-  
+
+.header li:hover {
+    transform: scale(1.2);
+}
   
   /* Banner Section */
   .banner {
@@ -144,6 +147,7 @@ html {
   }
 
   
+
 
 
 
