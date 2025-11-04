@@ -38,7 +38,7 @@ html {
   
   /* Header */
   .header {
-    position: fixed;
+    position: flex;
     top: 0;
     width: 100%;
     padding: 20px 0;
@@ -142,5 +142,6 @@ html {
   }
 
   
+
 
 
