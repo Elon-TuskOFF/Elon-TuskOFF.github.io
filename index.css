@@ -61,7 +61,7 @@ html {
     color: #4A4A4A;
   }
 
-  .header a:hover {
+  .header:hover {
     color: #4D00FF;
     transform: scale(1.2);
   }
@@ -142,4 +142,5 @@ html {
   }
 
   
+
 
