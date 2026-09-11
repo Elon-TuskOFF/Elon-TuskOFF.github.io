@@ -126,8 +126,18 @@ a.home {
 }
 
 .sample .text {
+  display: inline-block;
   color: #4D00FF;
   font-size: 100px;
+  transition: transform 0.2s ease;
+  transform-origin: center;
+}
+
+/* Only the actual text sample reacts to the cursor.
+   This prevents the whole sample/text box from expanding
+   when the cursor is merely near it. */
+.sample .text:hover {
+  transform: scale(1.08);
 }
 
 .garamond {
