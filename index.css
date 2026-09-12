@@ -301,6 +301,11 @@ p {
 
 /* Mobile */
 @media (max-width: 760px) {
+  /* Keep the mobile header in normal document flow instead of following the page. */
+  .site-header {
+    position: static;
+  }
+
   .navigation {
     min-height: 60px;
   }
