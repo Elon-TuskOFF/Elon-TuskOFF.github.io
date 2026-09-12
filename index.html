@@ -7,24 +7,28 @@
   <title>Lviv Polytechnic</title>
   <link rel="stylesheet" href="./index.css">
 </head>
+
 <body>
   <header class="site-header">
-    <nav class="nav" aria-label="Головна навігація">
-      <a class="logo" href="#top">
-        <span class="logo-image" aria-hidden="true">
-          <img src="images/Minecraft_Polytechnic.png" alt="">
-        </span>
+    <nav class="navigation" aria-label="Головна навігація">
+      <a class="site-logo" href="#top">
+        <img src="images/Minecraft_Polytechnic.png" alt="Логотип">
         <span>СЕРВЕР ЛЬВІВСЬКОЇ ПОЛІТЕХНІКИ</span>
       </a>
-      <div class="nav-links">
-        <div class="catalog-nav">
-          <a class="catalog-trigger" href="#catalog">Каталог</a>
-          <div class="catalog-menu" aria-label="Розділи каталогу">
-            <a href="#catalog" data-catalog-filter="all">Усі сервери</a>
-            <a href="#catalog" data-catalog-filter="minecraft">Minecraft</a>
-            <a href="#catalog" data-catalog-filter="other">Інші сервери</a>
+
+      <div class="navigation-links">
+        <div class="catalog-dropdown">
+          <a class="catalog-link" href="#catalog">Каталог</a>
+
+          <div class="catalog-menu" aria-label="Фільтр серверів">
+            <a href="#catalog" data-filter="all">Усі сервери</a>
+            <a href="#catalog" data-filter="minecraft">Minecraft</a>
+            <a href="#catalog" data-filter="gtnh">GTNH</a>
+            <a href="#catalog" data-filter="hytale">Hytale</a>
+            <a href="#catalog" data-filter="project-zomboid">Project Zomboid</a>
           </div>
         </div>
+
         <a href="#contact">Контакт</a>
       </div>
     </nav>
@@ -36,29 +40,46 @@
         <p class="section-label">КАТАЛОГ</p>
         <h1>Доступні сервери</h1>
 
-        <div id="server-list" class="server-list" aria-live="polite">
-          <article class="server-card" data-server-type="minecraft">
-            <div class="server-image" aria-hidden="true"><img src="images/Minecraft_Polytechnic.png" alt="IMG"></div>
+        <div class="server-list" aria-live="polite">
+          <article class="server-card" data-server="minecraft">
+            <div class="server-image">
+              <img src="images/minecraft.png" alt="Minecraft">
+            </div>
             <div class="server-info">
-              <h2>Minecraft Сервер</h2>
+              <h2>Minecraft</h2>
               <p>У розробці</p>
             </div>
             <div class="server-status status-online" title="Онлайн" aria-label="Онлайн"></div>
           </article>
 
-          <article class="server-card" data-server-type="minecraft">
-            <div class="server-image" aria-hidden="true">IMG</div>
+          <article class="server-card" data-server="gtnh">
+            <div class="server-image">
+              <img src="images/gtnh.png" alt="GTNH">
+            </div>
             <div class="server-info">
-              <h2>Project Zomboid Сервер</h2>
+              <h2>GTNH</h2>
               <p>У розробці</p>
             </div>
             <div class="server-status status-restarting" title="Перезапуск" aria-label="Перезапуск"></div>
           </article>
 
-          <article class="server-card" data-server-type="other">
-            <div class="server-image" aria-hidden="true">IMG</div>
+          <article class="server-card" data-server="hytale">
+            <div class="server-image">
+              <img src="images/hytale.png" alt="Hytale">
+            </div>
             <div class="server-info">
-              <h2>Hytale Сервер</h2>
+              <h2>Hytale</h2>
+              <p>У розробці</p>
+            </div>
+            <div class="server-status status-stopped" title="Зупинений" aria-label="Зупинений"></div>
+          </article>
+
+          <article class="server-card" data-server="project-zomboid">
+            <div class="server-image">
+              <img src="images/project-zomboid.png" alt="Project Zomboid">
+            </div>
+            <div class="server-info">
+              <h2>Project Zomboid</h2>
               <p>У розробці</p>
             </div>
             <div class="server-status status-stopped" title="Зупинений" aria-label="Зупинений"></div>
@@ -74,12 +95,14 @@
         <p class="section-label">CONTACT</p>
         <h2>У розробці</h2>
       </div>
+
       <div class="contact-links">
         <a href="mailto:your@email.com">Email</a>
         <a href="#">GitHub</a>
         <a href="#">Discord</a>
       </div>
     </div>
+
     <div class="container footer-bottom">
       <span>Сайт зроблено студентом Львівської Політехніки</span>
       <span>За допомогою HTML, CSS &amp; JS</span>
