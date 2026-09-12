@@ -8,6 +8,9 @@
   --secondary-text: #B0B0B0;
   --border: #444444;
   --accent: #888888;
+  --online: #35c759;
+  --restarting: #ff9f0a;
+  --stopped: #ff3b30;
 }
 
 html {
@@ -38,11 +41,10 @@ a:hover {
   margin: 0 auto;
 }
 
-/* Header — one continuous horizontal line */
 .site-header {
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 20;
   border-bottom: 1px solid var(--border);
   background: rgba(18, 18, 18, 0.96);
   backdrop-filter: blur(8px);
@@ -71,23 +73,69 @@ a:hover {
   gap: 28px;
 }
 
-.nav-links a {
+.nav-links > a,
+.catalog-trigger {
   color: var(--secondary-text);
   font-size: 14px;
   transition: color 0.2s ease;
 }
 
-.nav-links a:hover {
+.nav-links > a:hover,
+.catalog-trigger:hover {
   color: var(--primary-text);
 }
 
-/* Main */
-.hero {
-  padding: 120px 0 130px;
-  border-bottom: 1px solid var(--border);
+.catalog-nav {
+  position: relative;
+  padding: 24px 0;
 }
 
-.eyebrow,
+/* Dropdown opens when Catalog is hovered. */
+.catalog-menu {
+  position: absolute;
+  top: calc(100% - 5px);
+  right: -18px;
+  width: 190px;
+  padding: 8px;
+  border: 1px solid var(--border);
+  background: #181818;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
+}
+
+.catalog-nav:hover .catalog-menu,
+.catalog-nav:focus-within .catalog-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.catalog-menu a {
+  display: block;
+  padding: 10px 12px;
+  color: var(--secondary-text);
+  font-size: 13px;
+  border-bottom: 1px solid transparent;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+.catalog-menu a:hover {
+  color: var(--primary-text);
+  background: #222222;
+}
+
+.catalog-menu a:last-child {
+  border-bottom: 0;
+}
+
+.catalog-section {
+  min-height: calc(100vh - 68px);
+  padding: 90px 0 120px;
+}
+
 .section-label {
   margin: 0 0 18px;
   color: var(--accent);
@@ -98,81 +146,100 @@ a:hover {
 
 h1,
 h2,
-h3,
 p {
   margin-top: 0;
 }
 
-h1 {
-  max-width: 850px;
-  margin-bottom: 28px;
-  font-size: clamp(42px, 7vw, 82px);
+.catalog-section h1 {
+  margin-bottom: 45px;
+  font-size: clamp(42px, 7vw, 76px);
   line-height: 1.05;
   letter-spacing: -0.04em;
 }
 
-h2 {
-  margin-bottom: 24px;
-  font-size: clamp(30px, 4vw, 48px);
-  line-height: 1.1;
-  letter-spacing: -0.025em;
+.server-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-h3 {
-  margin-bottom: 12px;
-  font-size: 21px;
+.server-card {
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr) 18px;
+  align-items: center;
+  gap: 22px;
+  min-height: 104px;
+  padding: 13px 22px 13px 13px;
+  border: 1px solid var(--border);
+  background: #151515;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
 }
 
-.lead {
-  max-width: 700px;
+.server-card:hover {
+  border-color: var(--accent);
+  background: #191919;
+  transform: translateX(3px);
+}
+
+.server-image {
+  width: 76px;
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  background: #202020;
+  color: #666666;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  overflow: hidden;
+}
+
+/* Replace the IMG block with an <img> later when server icons are available. */
+.server-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.server-info {
+  min-width: 0;
+}
+
+.server-info h2 {
+  margin-bottom: 4px;
+  font-size: 18px;
+  line-height: 1.3;
+}
+
+.server-info p {
   margin-bottom: 0;
   color: var(--secondary-text);
-  font-size: 19px;
-}
-
-.section {
-  padding: 100px 0;
-}
-
-.section-border {
-  border-top: 1px solid var(--border);
-}
-
-.section p:not(.section-label) {
-  max-width: 760px;
-  color: var(--secondary-text);
-}
-
-.projects {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  margin-top: 50px;
-  border: 1px solid var(--border);
-  background: var(--border);
-}
-
-.project {
-  min-height: 220px;
-  padding: 30px;
-  background: var(--background);
-}
-
-.project p {
-  min-height: 80px;
-  margin-bottom: 24px;
-}
-
-.project a {
-  color: var(--accent);
   font-size: 14px;
+  line-height: 1.5;
 }
 
-.project a:hover {
-  color: var(--primary-text);
+.server-status {
+  width: 13px;
+  height: 13px;
+  justify-self: end;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.035);
 }
 
-/* Footer */
+.status-online {
+  background: var(--online);
+}
+
+.status-restarting {
+  background: var(--restarting);
+}
+
+.status-stopped {
+  background: var(--stopped);
+}
+
 .site-footer {
   border-top: 1px solid var(--border);
   padding: 80px 0 30px;
@@ -222,24 +289,42 @@ h3 {
     min-height: 60px;
   }
 
+  .logo {
+    max-width: 55vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   .nav-links {
     gap: 15px;
   }
 
-  .nav-links a {
+  .nav-links > a,
+  .catalog-trigger {
     font-size: 12px;
   }
 
-  .hero {
-    padding: 80px 0 90px;
+  .catalog-section {
+    padding: 70px 0 90px;
   }
 
-  .section {
-    padding: 70px 0;
+  .server-card {
+    grid-template-columns: 64px minmax(0, 1fr) 14px;
+    gap: 15px;
+    padding-right: 16px;
   }
 
-  .projects {
-    grid-template-columns: 1fr;
+  .server-image {
+    width: 64px;
+    height: 64px;
+  }
+
+  .server-info h2 {
+    font-size: 16px;
+  }
+
+  .server-info p {
+    font-size: 13px;
   }
 
   .footer-content,
@@ -256,14 +341,18 @@ h3 {
   }
 
   .nav {
-    gap: 16px;
+    gap: 12px;
   }
 
   .logo {
-    font-size: 12px;
+    font-size: 10px;
   }
 
   .nav-links {
     gap: 10px;
+  }
+
+  .catalog-menu {
+    right: -10px;
   }
 }
