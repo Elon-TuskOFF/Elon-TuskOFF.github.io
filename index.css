@@ -118,7 +118,7 @@ a:hover {
 
 .catalog-menu {
   position: absolute;
-  top: calc(100% - 5px);
+  top: 100%;
   right: -18px;
   width: 190px;
   padding: 8px;
@@ -127,14 +127,17 @@ a:hover {
   box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
   opacity: 0;
   visibility: hidden;
+  pointer-events: none;
   transform: translateY(-6px);
-  transition: opacity 0.18s ease, transform 0.18s ease;
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
 }
 
 .catalog-dropdown:hover .catalog-menu,
-.catalog-dropdown:focus-within .catalog-menu {
+.catalog-dropdown:focus-within .catalog-menu,
+.catalog-dropdown.is-open .catalog-menu {
   opacity: 1;
   visibility: visible;
+  pointer-events: auto;
   transform: translateY(0);
 }
 
@@ -301,7 +304,6 @@ p {
 
 /* Mobile */
 @media (max-width: 760px) {
-  /* Keep the mobile header in normal document flow instead of following the page. */
   .site-header {
     position: static;
   }
@@ -334,6 +336,10 @@ p {
   .navigation-links > a,
   .catalog-link {
     font-size: 12px;
+  }
+
+  .catalog-menu {
+    right: -8px;
   }
 
   .catalog-section {
