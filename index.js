@@ -1,43 +1,26 @@
-/*
- * Server catalog logic.
- *
- * The status dots currently use the status written in index.html.
- * Later, this file can request live data from your own API/backend.
- *
- * Recommended future API response:
- * {
- *   "minecraft": "online",
- *   "gtnh": "restarting"
- * }
- *
- * A browser should not directly query a Minecraft server's raw port.
- * Instead, use a small backend/API that checks the server and returns
- * safe JSON to this page.
- */
+// Server catalog filtering and live status updates.
 
 document.addEventListener("DOMContentLoaded", () => {
-  const filterLinks = document.querySelectorAll("[data-catalog-filter]");
-  const serverCards = document.querySelectorAll("[data-server-type]");
+  const filterLinks = document.querySelectorAll("[data-filter]");
+  const serverCards = document.querySelectorAll("[data-server]");
 
   filterLinks.forEach((link) => {
     link.addEventListener("click", () => {
-      const filter = link.dataset.catalogFilter;
+      const selectedServer = link.dataset.filter;
 
       serverCards.forEach((card) => {
-        const shouldShow = filter === "all" || card.dataset.serverType === filter;
-        card.hidden = !shouldShow;
+        const showAll = selectedServer === "all";
+        const matchesServer = card.dataset.server === selectedServer;
+
+        card.hidden = !showAll && !matchesServer;
       });
     });
   });
 
-  // Future example:
-  // updateServerStatuses("/api/servers");
+  // Later: updateServerStatuses("/api/servers");
 });
 
-/*
- * Future live-status function.
- * Keep this here so the frontend is ready when the API exists.
- */
+// Updates server status indicators using data from the server-status API.
 async function updateServerStatuses(apiUrl) {
   try {
     const response = await fetch(apiUrl, { cache: "no-store" });
@@ -48,8 +31,8 @@ async function updateServerStatuses(apiUrl) {
 
     const servers = await response.json();
 
-    document.querySelectorAll("[data-server-id]").forEach((card) => {
-      const serverId = card.dataset.serverId;
+    document.querySelectorAll("[data-server]").forEach((card) => {
+      const serverId = card.dataset.server;
       const status = servers[serverId];
       const indicator = card.querySelector(".server-status");
 
