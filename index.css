@@ -112,6 +112,23 @@ a:hover {
   color: #fff;
 }
 
+/* The chevron makes it obvious that Catalog opens a menu. */
+.catalog-link::after {
+  content: "⌄";
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 14px;
+  line-height: 1;
+  transform: translateY(-1px);
+  transition: transform 0.18s ease;
+}
+
+.catalog-dropdown:hover .catalog-link::after,
+.catalog-dropdown:focus-within .catalog-link::after,
+.catalog-dropdown.is-open .catalog-link::after {
+  transform: rotate(180deg) translateY(1px);
+}
+
 .catalog-dropdown {
   position: relative;
   padding: 24px 0;
