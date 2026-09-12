@@ -4,10 +4,10 @@
 
 :root {
   --background: #121212;
-  --primary-text: #E0E0E0;
-  --secondary-text: #B0B0B0;
-  --border: #444444;
-  --accent: #888888;
+  --primary-text: #e0e0e0;
+  --secondary-text: #b0b0b0;
+  --border: #444;
+  --accent: #888;
   --online: #35c759;
   --restarting: #ff9f0a;
   --stopped: #ff3b30;
@@ -36,11 +36,13 @@ a:hover {
   color: var(--accent);
 }
 
-.container {
+.container,
+.navigation {
   width: min(1100px, calc(100% - 40px));
   margin: 0 auto;
 }
 
+/* Header */
 .site-header {
   position: sticky;
   top: 0;
@@ -50,18 +52,16 @@ a:hover {
   backdrop-filter: blur(8px);
 }
 
-.nav {
+.navigation {
   min-height: 68px;
-  width: min(1200px, calc(100% - 40px));
-  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 30px;
 }
 
-.logo {
-  display: inline-flex;
+.site-logo {
+  display: flex;
   align-items: center;
   gap: 12px;
   font-size: 14px;
@@ -70,50 +70,37 @@ a:hover {
   white-space: nowrap;
 }
 
-/* Header image slot: place your image at images/polytechnic-logo.png */
-.logo-image {
+.site-logo img {
   width: 38px;
   height: 38px;
   flex: 0 0 38px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--border);
-  background: #202020;
-  overflow: hidden;
-}
-
-.logo-image img {
-  width: 100%;
-  height: 100%;
   object-fit: cover;
-  display: block;
+  border: 1px solid var(--border);
 }
 
-.nav-links {
+.navigation-links {
   display: flex;
   align-items: center;
   gap: 28px;
 }
 
-.nav-links > a,
-.catalog-trigger {
+.navigation-links > a,
+.catalog-link {
   color: var(--secondary-text);
   font-size: 14px;
   transition: color 0.2s ease;
 }
 
-.nav-links > a:hover,
-.catalog-trigger:hover {
+.navigation-links > a:hover,
+.catalog-link:hover {
   color: var(--primary-text);
 }
 
-.catalog-nav {
+.catalog-dropdown {
   position: relative;
   padding: 24px 0;
 }
 
-/* Dropdown opens when Catalog is hovered. */
 .catalog-menu {
   position: absolute;
   top: calc(100% - 5px);
@@ -126,11 +113,11 @@ a:hover {
   opacity: 0;
   visibility: hidden;
   transform: translateY(-6px);
-  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
+  transition: opacity 0.18s ease, transform 0.18s ease;
 }
 
-.catalog-nav:hover .catalog-menu,
-.catalog-nav:focus-within .catalog-menu {
+.catalog-dropdown:hover .catalog-menu,
+.catalog-dropdown:focus-within .catalog-menu {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
@@ -141,19 +128,14 @@ a:hover {
   padding: 10px 12px;
   color: var(--secondary-text);
   font-size: 13px;
-  border-bottom: 1px solid transparent;
-  transition: background 0.18s ease, color 0.18s ease;
 }
 
 .catalog-menu a:hover {
   color: var(--primary-text);
-  background: #222222;
+  background: #222;
 }
 
-.catalog-menu a:last-child {
-  border-bottom: 0;
-}
-
+/* Catalog */
 .catalog-section {
   min-height: calc(100vh - 68px);
   padding: 90px 0 120px;
@@ -210,13 +192,9 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
   border: 1px solid var(--border);
   background: #202020;
-  color: #666666;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  overflow: hidden;
 }
 
 .server-image img {
@@ -262,6 +240,7 @@ p {
   background: var(--stopped);
 }
 
+/* Footer */
 .site-footer {
   border-top: 1px solid var(--border);
   padding: 80px 0 30px;
@@ -286,9 +265,9 @@ p {
 }
 
 .contact-links a {
+  padding-bottom: 4px;
   color: var(--secondary-text);
   border-bottom: 1px solid var(--border);
-  padding-bottom: 4px;
 }
 
 .contact-links a:hover {
@@ -306,29 +285,35 @@ p {
   font-size: 12px;
 }
 
+/* Mobile */
 @media (max-width: 760px) {
-  .nav {
+  .navigation {
     min-height: 60px;
   }
 
-  .logo {
+  .site-logo {
     max-width: 55vw;
+    overflow: hidden;
+    font-size: 11px;
+  }
+
+  .site-logo span {
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
-  .logo-image {
+  .site-logo img {
     width: 32px;
     height: 32px;
     flex-basis: 32px;
   }
 
-  .nav-links {
+  .navigation-links {
     gap: 15px;
   }
 
-  .nav-links > a,
-  .catalog-trigger {
+  .navigation-links > a,
+  .catalog-link {
     font-size: 12px;
   }
 
@@ -364,26 +349,26 @@ p {
 
 @media (max-width: 480px) {
   .container,
-  .nav {
+  .navigation {
     width: min(100% - 28px, 1100px);
   }
 
-  .nav {
+  .navigation {
     gap: 12px;
   }
 
-  .logo {
+  .site-logo {
     font-size: 10px;
     gap: 8px;
   }
 
-  .logo-image {
+  .site-logo img {
     width: 28px;
     height: 28px;
     flex-basis: 28px;
   }
 
-  .nav-links {
+  .navigation-links {
     gap: 10px;
   }
 
