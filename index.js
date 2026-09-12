@@ -3,6 +3,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const filterLinks = document.querySelectorAll("[data-filter]");
   const serverCards = document.querySelectorAll("[data-server]");
+  const logoContainer = document.querySelector(".site-logo-image");
 
   filterLinks.forEach((link) => {
     link.addEventListener("click", () => {
@@ -16,6 +17,41 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   });
+
+  // Replace the static logo with a brand-new GIF element on every hover.
+  // Creating a new GIF element makes the animation start from frame 1.
+  if (logoContainer) {
+    const staticLogoSrc = "images/Minecraft_Polytechnic.png";
+    const animatedLogoSrc = "gifs/animated_minecraftPoly.gif";
+    let animatedLogo = null;
+
+    logoContainer.addEventListener("mouseenter", () => {
+      if (animatedLogo) return;
+
+      const staticLogo = logoContainer.querySelector(".logo-static");
+      if (!staticLogo) return;
+
+      animatedLogo = document.createElement("img");
+      animatedLogo.className = "logo-animated";
+      animatedLogo.src = animatedLogoSrc;
+      animatedLogo.alt = "";
+      animatedLogo.setAttribute("aria-hidden", "true");
+
+      staticLogo.replaceWith(animatedLogo);
+    });
+
+    logoContainer.addEventListener("mouseleave", () => {
+      if (!animatedLogo) return;
+
+      const staticLogo = document.createElement("img");
+      staticLogo.className = "logo-static";
+      staticLogo.src = staticLogoSrc;
+      staticLogo.alt = "Логотип";
+
+      animatedLogo.replaceWith(staticLogo);
+      animatedLogo = null;
+    });
+  }
 
   // Later: updateServerStatuses("/api/servers");
 });
