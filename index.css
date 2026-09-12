@@ -61,10 +61,33 @@ a:hover {
 }
 
 .logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.12em;
   white-space: nowrap;
+}
+
+/* Header image slot: place your image at images/polytechnic-logo.png */
+.logo-image {
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  background: #202020;
+  overflow: hidden;
+}
+
+.logo-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .nav-links {
@@ -196,7 +219,6 @@ p {
   overflow: hidden;
 }
 
-/* Replace the IMG block with an <img> later when server icons are available. */
 .server-image img {
   width: 100%;
   height: 100%;
@@ -295,6 +317,12 @@ p {
     text-overflow: ellipsis;
   }
 
+  .logo-image {
+    width: 32px;
+    height: 32px;
+    flex-basis: 32px;
+  }
+
   .nav-links {
     gap: 15px;
   }
@@ -346,6 +374,13 @@ p {
 
   .logo {
     font-size: 10px;
+    gap: 8px;
+  }
+
+  .logo-image {
+    width: 28px;
+    height: 28px;
+    flex-basis: 28px;
   }
 
   .nav-links {
