@@ -36,27 +36,51 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Create a completely new GIF URL on every hover.
-  // The timestamp prevents the browser from reusing the already-decoded animation,
-  // so the GIF starts from its first frame every time.
+  // Load the GIF before the user hovers so there is no blank/frozen moment.
+  // Each hover creates a fresh image using the already-loaded GIF data,
+  // which makes the animation begin from its first frame without network lag.
   if (logoContainer) {
     const staticLogoSrc = "images/Minecraft_Polytechnic.png";
     const animatedLogoSrc = "gifs/animated_minecraftPoly.gif";
+    let animatedLogoUrl = null;
     let animatedLogo = null;
 
+    fetch(animatedLogoSrc, { cache: "force-cache" })
+      .then((response) => {
+        if (!response.ok) throw new Error(`GIF returned ${response.status}`);
+        return response.blob();
+      })
+      .then((blob) => {
+        animatedLogoUrl = URL.createObjectURL(blob);
+      })
+      .catch((error) => {
+        console.error("Unable to preload animated logo:", error);
+      });
+
     logoContainer.addEventListener("mouseenter", () => {
-      if (animatedLogo) return;
+      if (animatedLogo || !animatedLogoUrl) return;
 
       const staticLogo = logoContainer.querySelector(".logo-static");
       if (!staticLogo) return;
 
-      animatedLogo = document.createElement("img");
-      animatedLogo.className = "logo-animated";
-      animatedLogo.src = `${animatedLogoSrc}?hover=${Date.now()}`;
-      animatedLogo.alt = "";
-      animatedLogo.setAttribute("aria-hidden", "true");
+      const nextLogo = document.createElement("img");
+      nextLogo.className = "logo-animated";
+      nextLogo.src = animatedLogoUrl;
+      nextLogo.alt = "";
+      nextLogo.setAttribute("aria-hidden", "true");
 
-      staticLogo.replaceWith(animatedLogo);
+      // Wait until the first frame is ready, then replace the static logo.
+      // This prevents the visible blink that happened while the GIF loaded.
+      nextLogo.addEventListener(
+        "load",
+        () => {
+          if (logoContainer.contains(staticLogo)) {
+            staticLogo.replaceWith(nextLogo);
+            animatedLogo = nextLogo;
+          }
+        },
+        { once: true }
+      );
     });
 
     logoContainer.addEventListener("mouseleave", () => {
