@@ -18,8 +18,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Replace the static logo with a brand-new GIF element on every hover.
-  // Creating a new GIF element makes the animation start from frame 1.
+  // Create a completely new GIF URL on every hover.
+  // The timestamp prevents the browser from reusing the already-decoded animation,
+  // so the GIF starts from its first frame every time.
   if (logoContainer) {
     const staticLogoSrc = "images/Minecraft_Polytechnic.png";
     const animatedLogoSrc = "gifs/animated_minecraftPoly.gif";
@@ -33,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       animatedLogo = document.createElement("img");
       animatedLogo.className = "logo-animated";
-      animatedLogo.src = animatedLogoSrc;
+      animatedLogo.src = `${animatedLogoSrc}?hover=${Date.now()}`;
       animatedLogo.alt = "";
       animatedLogo.setAttribute("aria-hidden", "true");
 
