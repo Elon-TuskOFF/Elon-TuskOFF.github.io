@@ -1,24 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Personal website">
+  <meta name="description" content="Каталог серверів Львівської Політехніки">
   <title>Lviv Polytechnic</title>
   <link rel="stylesheet" href="./index.css">
 </head>
 <body>
   <header class="site-header">
-    <nav class="nav" aria-label="Main navigation">
+    <nav class="nav" aria-label="Головна навігація">
       <a class="logo" href="#top">СЕРВЕР ЛЬВІВСЬКОЇ ПОЛІТЕХНІКИ</a>
       <div class="nav-links">
-        <a href="#top">Каталог</a>
+        <div class="catalog-nav">
+          <a class="catalog-trigger" href="#catalog">Каталог</a>
+          <div class="catalog-menu" aria-label="Розділи каталогу">
+            <a href="#catalog" data-catalog-filter="all">Усі сервери</a>
+            <a href="#catalog" data-catalog-filter="minecraft">Minecraft</a>
+            <a href="#catalog" data-catalog-filter="other">Інші сервери</a>
+          </div>
+        </div>
         <a href="#contact">Контакт</a>
       </div>
     </nav>
   </header>
 
-  <main id="top"></main>
+  <main id="top">
+    <section id="catalog" class="catalog-section">
+      <div class="container">
+        <p class="section-label">КАТАЛОГ</p>
+        <h1>Сервери</h1>
+
+        <div id="server-list" class="server-list" aria-live="polite">
+          <article class="server-card" data-server-type="minecraft">
+            <div class="server-image" aria-hidden="true">IMG</div>
+            <div class="server-info">
+              <h2>Minecraft Server</h2>
+              <p>Опис сервера, його версія, модпак та інша корисна інформація.</p>
+            </div>
+            <div class="server-status status-online" title="Онлайн" aria-label="Онлайн"></div>
+          </article>
+
+          <article class="server-card" data-server-type="minecraft">
+            <div class="server-image" aria-hidden="true">IMG</div>
+            <div class="server-info">
+              <h2>GTNH Server</h2>
+              <p>Інший сервер. Статус у майбутньому буде отримуватися автоматично.</p>
+            </div>
+            <div class="server-status status-restarting" title="Перезапуск" aria-label="Перезапуск"></div>
+          </article>
+
+          <article class="server-card" data-server-type="other">
+            <div class="server-image" aria-hidden="true">IMG</div>
+            <div class="server-info">
+              <h2>Інший сервер</h2>
+              <p>Тут можна розмістити іншу гру, сервіс або окремий сервер.</p>
+            </div>
+            <div class="server-status status-stopped" title="Зупинений" aria-label="Зупинений"></div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer id="contact" class="site-footer">
     <div class="container footer-content">
@@ -34,8 +77,10 @@
     </div>
     <div class="container footer-bottom">
       <span>Сайт зроблено студентом Львівської Політехніки</span>
-      <span>За допомогою HTML &amp; CSS</span>
+      <span>За допомогою HTML, CSS &amp; JS</span>
     </div>
   </footer>
+
+  <script src="./index.js"></script>
 </body>
 </html>
