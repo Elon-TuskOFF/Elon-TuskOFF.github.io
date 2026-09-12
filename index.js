@@ -4,6 +4,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const filterLinks = document.querySelectorAll("[data-filter]");
   const serverCards = document.querySelectorAll("[data-server]");
   const logoContainer = document.querySelector(".site-logo-image");
+  const catalogDropdown = document.querySelector(".catalog-dropdown");
+  const catalogLink = document.querySelector(".catalog-link");
 
   filterLinks.forEach((link) => {
     link.addEventListener("click", () => {
@@ -15,8 +17,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
         card.hidden = !showAll && !matchesServer;
       });
+
+      catalogDropdown?.classList.remove("is-open");
     });
   });
+
+  // Keep the catalog menu open until the user deliberately closes it.
+  if (catalogDropdown && catalogLink) {
+    catalogLink.addEventListener("click", (event) => {
+      event.preventDefault();
+      catalogDropdown.classList.toggle("is-open");
+    });
+
+    document.addEventListener("click", (event) => {
+      if (!catalogDropdown.contains(event.target)) {
+        catalogDropdown.classList.remove("is-open");
+      }
+    });
+  }
 
   // Create a completely new GIF URL on every hover.
   // The timestamp prevents the browser from reusing the already-decoded animation,
