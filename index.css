@@ -107,9 +107,9 @@ h1, h2, p { margin-top: 0; }
   .hero-section { aspect-ratio: 1199 / 637; min-height: 430px; }
   .hero-image { background-position: 42% center; }
   .hero-content { min-height: 430px; align-items: flex-end; }
-  .hero-copy { width: 100%; padding: 85px 0 0; text-align: right; }
+  .hero-copy { width: 100%; padding: 85px 0 0; text-align: center; }
   .hero-copy h1 { font-size: clamp(42px, 12vw, 64px); }
-  .hero-copy h3 { max-width: 430px; margin-left: auto; font-size: 17px; }
+  .hero-copy h3 { max-width: 430px; margin: 0 auto; font-size: 17px; }
   .hero-actions { margin-top: 110px; gap: 10px; }
   .hero-button { min-width: 145px; padding: 12px 17px; }
   .catalog-section { padding: 20px 0 90px; }
