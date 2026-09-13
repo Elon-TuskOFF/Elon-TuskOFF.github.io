@@ -163,13 +163,13 @@ a:hover { color: var(--accent); }
   z-index: 1;
   min-height: 520px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-end;
 }
 
 .hero-copy {
   width: min(500px, 48%);
-  padding: 40px 0 80px;
+  padding: 120px 0 80px;
   text-align: right;
 }
 .hero-copy h1 {
@@ -241,8 +241,8 @@ h1, h2, p { margin-top: 0; }
 
   .hero-section, .hero-content { min-height: 430px; }
   .hero-image { background-position: 42% center; }
-  .hero-content { align-items: flex-end; }
-  .hero-copy { width: 100%; padding: 0 0 90px; text-align: right; }
+  .hero-content { align-items: flex-start; }
+  .hero-copy { width: 100%; padding: 85px 0 90px; text-align: right; }
   .hero-copy h1 { font-size: clamp(42px, 12vw, 64px); }
   .hero-copy h3 { max-width: 430px; margin-left: auto; font-size: 17px; }
 
@@ -264,7 +264,7 @@ h1, h2, p { margin-top: 0; }
   .navigation-links > a, .catalog-link { font-size: 13px; }
   .catalog-menu { right: -10px; }
   .hero-section, .hero-content { min-height: 390px; }
-  .hero-copy { padding-bottom: 72px; }
+  .hero-copy { padding: 72px 0 72px; }
   .hero-copy h1 { font-size: 43px; }
   .hero-copy h3 { font-size: 15px; }
 }
