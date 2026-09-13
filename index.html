@@ -22,7 +22,6 @@
       <div class="navigation-links">
         <div class="catalog-dropdown">
           <a class="catalog-link" href="#catalog">Каталог</a>
-
           <div class="catalog-menu" aria-label="Фільтр серверів">
             <a href="#catalog" data-filter="all">Усі сервери</a>
             <a href="#catalog" data-filter="minecraft">Minecraft</a>
@@ -31,13 +30,22 @@
             <a href="#catalog" data-filter="project-zomboid">Project Zomboid</a>
           </div>
         </div>
-
         <a href="#contact">Контакт</a>
       </div>
     </nav>
   </header>
 
   <main id="top">
+    <section class="hero-section" aria-label="Вітальний блок">
+      <div class="hero-image" aria-hidden="true"></div>
+      <div class="hero-content container">
+        <div class="hero-copy">
+          <h1>Твій сервер.<br>Твоя гра.</h1>
+          <h3>Обирай сервер, приєднуйся до спільноти та грай разом.</h3>
+        </div>
+      </div>
+    </section>
+
     <section id="catalog" class="catalog-section">
       <div class="container">
         <p class="section-label">КАТАЛОГ</p>
@@ -45,46 +53,23 @@
 
         <div class="server-list" aria-live="polite">
           <article class="server-card" data-server="minecraft">
-            <div class="server-image">
-              <img src="images/Minecraft_Polytechnic.png" alt="Minecraft">
-            </div>
-            <div class="server-info">
-              <h2>Minecraft</h2>
-              <p>У розробці</p>
-            </div>
+            <div class="server-image"><img src="images/Minecraft_Polytechnic.png" alt="Minecraft"></div>
+            <div class="server-info"><h2>Minecraft</h2><p>У розробці</p></div>
             <div class="server-status status-stopped" title="Зупинений" aria-label="Зупинений"></div>
           </article>
-
           <article class="server-card" data-server="gtnh">
-            <div class="server-image">
-              <img src="images/gregtechlogo.png" alt="GTNH">
-            </div>
-            <div class="server-info">
-              <h2>GregTech: New Horizons</h2>
-              <p>Відкриття на 2.9.x версію.</p>
-            </div>
+            <div class="server-image"><img src="images/gregtechlogo.png" alt="GTNH"></div>
+            <div class="server-info"><h2>GregTech: New Horizons</h2><p>Відкриття на 2.9.x версію.</p></div>
             <div class="server-status status-stopped" title="Зупинений" aria-label="Зупинений"></div>
           </article>
-
           <article class="server-card" data-server="hytale">
-            <div class="server-image">
-              <img src="images/hytale.png" alt="Hytale">
-            </div>
-            <div class="server-info">
-              <h2>Hytale</h2>
-              <p>Відкриття на 2 Chapter.</p>
-            </div>
+            <div class="server-image"><img src="images/hytale.png" alt="Hytale"></div>
+            <div class="server-info"><h2>Hytale</h2><p>Відкриття на 2 Chapter.</p></div>
             <div class="server-status status-stopped" title="Зупинений" aria-label="Зупинений"></div>
           </article>
-
           <article class="server-card" data-server="project-zomboid">
-            <div class="server-image">
-              <img src="images/project-zomboid.png" alt="Project Zomboid">
-            </div>
-            <div class="server-info">
-              <h2>Project Zomboid</h2>
-              <p>У пошуках сервера.</p>
-            </div>
+            <div class="server-image"><img src="images/project-zomboid.png" alt="Project Zomboid"></div>
+            <div class="server-info"><h2>Project Zomboid</h2><p>У пошуках сервера.</p></div>
             <div class="server-status status-stopped" title="Зупинений" aria-label="Зупинений"></div>
           </article>
         </div>
@@ -94,18 +79,13 @@
 
   <footer id="contact" class="site-footer">
     <div class="container footer-content">
-      <div>
-        <p class="section-label">CONTACT</p>
-        <h2>У розробці</h2>
-      </div>
-
+      <div><p class="section-label">CONTACT</p><h2>У розробці</h2></div>
       <div class="contact-links">
-        <a href="gandrij549@gmail.com" target="_blank">Email</a>
+        <a href="mailto:gandrij549@gmail.com" target="_blank">Email</a>
         <a href="https://github.com/Elon-TuskOFF" target="_blank">GitHub</a>
         <a href="https://t.me/i731ieh_uhe32" target="_blank">Telegram</a>
       </div>
     </div>
-
     <div class="container footer-bottom">
       <span>Сайт зроблено студентом Львівської Політехніки</span>
       <span>За допомогою HTML, CSS &amp; JS</span>
