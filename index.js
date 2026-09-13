@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const logoContainer = document.querySelector(".site-logo-image");
   const catalogDropdown = document.querySelector(".catalog-dropdown");
   const catalogLink = document.querySelector(".catalog-link");
+  const heroImage = document.querySelector(".hero-image");
 
   filterLinks.forEach((link) => {
     link.addEventListener("click", () => {
@@ -34,6 +35,53 @@ document.addEventListener("DOMContentLoaded", () => {
         catalogDropdown.classList.remove("is-open");
       }
     });
+  }
+
+  // Change the hero wallpaper once per day.
+  // Put your wallpapers in /everydayimg. The script automatically finds
+  // image files in that folder, so you do not need to edit this code when
+  // adding or removing wallpapers.
+  if (heroImage) {
+    const fallbackImage = "images/Prometheus.jpg";
+    const imageExtensions = /\.(avif|gif|jpe?g|png|webp)$/i;
+    const imageFolder = "everydayimg";
+    const repositoryApi = "https://api.github.com/repos/Elon-TuskOFF/Elon-TuskOFF.github.io/contents/everydayimg?ref=Test-4";
+
+    // Use the local date, so the wallpaper changes at the user's midnight.
+    const today = new Date();
+    const dateKey = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
+    let dayNumber = 0;
+
+    // The GitHub API provides the folder contents. This means the website
+    // automatically notices new images without changing index.js.
+    fetch(repositoryApi, { cache: "no-store" })
+      .then((response) => {
+        if (!response.ok) throw new Error(`Wallpaper folder returned ${response.status}`);
+        return response.json();
+      })
+      .then((files) => {
+        const wallpapers = files
+          .filter((file) => file.type === "file" && imageExtensions.test(file.name))
+          .sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }));
+
+        if (!wallpapers.length) throw new Error("No wallpapers found");
+
+        // Convert the calendar date into a stable number. The same image is
+        // shown all day, then the next image is selected the following day.
+        const startDate = new Date(2026, 0, 1);
+        const millisecondsPerDay = 24 * 60 * 60 * 1000;
+        dayNumber = Math.floor((new Date(today.getFullYear(), today.getMonth(), today.getDate()) - startDate) / millisecondsPerDay);
+
+        const wallpaper = wallpapers[((dayNumber % wallpapers.length) + wallpapers.length) % wallpapers.length];
+        heroImage.style.backgroundImage = `linear-gradient(90deg, rgba(18,18,18,.04) 0%, rgba(18,18,18,.08) 42%, rgba(18,18,18,.72) 100%), url("${wallpaper.download_url}")`;
+        heroImage.dataset.wallpaperDate = dateKey;
+      })
+      .catch((error) => {
+        // Keep the existing Prometheus wallpaper if the folder is missing,
+        // empty, or temporarily unavailable.
+        heroImage.style.backgroundImage = `linear-gradient(90deg, rgba(18,18,18,.04) 0%, rgba(18,18,18,.08) 42%, rgba(18,18,18,.72) 100%), url("${fallbackImage}")`;
+        console.warn("Unable to load daily wallpaper:", error);
+      });
   }
 
   // Preload the GIF data once. A brand-new Blob URL is created for every
