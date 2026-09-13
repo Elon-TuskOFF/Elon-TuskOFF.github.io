@@ -38,22 +38,13 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Change the hero wallpaper once per day.
-  // Put your wallpapers in /everydayimg. The script automatically finds
-  // image files in that folder, so you do not need to edit this code when
-  // adding or removing wallpapers.
+  // The wallpaper list is cached locally so the correct image can be chosen
+  // synchronously in <head> on the next visit, before the page is painted.
   if (heroImage) {
-    const fallbackImage = "images/Prometheus.jpg";
     const imageExtensions = /\.(avif|gif|jpe?g|png|webp)$/i;
-    const imageFolder = "everydayimg";
     const repositoryApi = "https://api.github.com/repos/Elon-TuskOFF/Elon-TuskOFF.github.io/contents/everydayimg?ref=Test-4";
+    const wallpaperCacheKey = "dailyWallpaperCache";
 
-    // Use the local date, so the wallpaper changes at the user's midnight.
-    const today = new Date();
-    const dateKey = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
-    let dayNumber = 0;
-
-    // The GitHub API provides the folder contents. This means the website
-    // automatically notices new images without changing index.js.
     fetch(repositoryApi, { cache: "no-store" })
       .then((response) => {
         if (!response.ok) throw new Error(`Wallpaper folder returned ${response.status}`);
@@ -62,24 +53,35 @@ document.addEventListener("DOMContentLoaded", () => {
       .then((files) => {
         const wallpapers = files
           .filter((file) => file.type === "file" && imageExtensions.test(file.name))
-          .sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }));
+          .sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }))
+          .map((file) => file.download_url)
+          .filter(Boolean);
 
         if (!wallpapers.length) throw new Error("No wallpapers found");
 
-        // Convert the calendar date into a stable number. The same image is
-        // shown all day, then the next image is selected the following day.
+        // Save the complete ordered list. The inline script in index.html
+        // can then select today's image without waiting for this API request.
+        try {
+          localStorage.setItem(wallpaperCacheKey, JSON.stringify({ wallpapers }));
+        } catch (error) {
+          console.warn("Unable to cache wallpaper list:", error);
+        }
+
+        const today = new Date();
         const startDate = new Date(2026, 0, 1);
         const millisecondsPerDay = 24 * 60 * 60 * 1000;
-        dayNumber = Math.floor((new Date(today.getFullYear(), today.getMonth(), today.getDate()) - startDate) / millisecondsPerDay);
+        const dayNumber = Math.floor(
+          (new Date(today.getFullYear(), today.getMonth(), today.getDate()) - startDate) / millisecondsPerDay
+        );
+        const index = ((dayNumber % wallpapers.length) + wallpapers.length) % wallpapers.length;
+        const wallpaper = wallpapers[index];
 
-        const wallpaper = wallpapers[((dayNumber % wallpapers.length) + wallpapers.length) % wallpapers.length];
-        heroImage.style.backgroundImage = `linear-gradient(90deg, rgba(18,18,18,.04) 0%, rgba(18,18,18,.08) 42%, rgba(18,18,18,.72) 100%), url("${wallpaper.download_url}")`;
-        heroImage.dataset.wallpaperDate = dateKey;
+        const background = `linear-gradient(90deg, rgba(18,18,18,.04) 0%, rgba(18,18,18,.08) 42%, rgba(18,18,18,.72) 100%), url("${wallpaper}")`;
+        document.documentElement.style.setProperty("--hero-wallpaper", background);
+        heroImage.dataset.wallpaperDate = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
       })
       .catch((error) => {
-        // Keep the existing Prometheus wallpaper if the folder is missing,
-        // empty, or temporarily unavailable.
-        heroImage.style.backgroundImage = `linear-gradient(90deg, rgba(18,18,18,.04) 0%, rgba(18,18,18,.08) 42%, rgba(18,18,18,.72) 100%), url("${fallbackImage}")`;
+        // CSS keeps the Prometheus fallback if the folder is unavailable.
         console.warn("Unable to load daily wallpaper:", error);
       });
   }
