@@ -9,30 +9,20 @@
   <link rel="icon" type="img" href="images/Minecraft_Polytechnic.png">
   <script>
     // Apply the last known wallpaper before the page paints.
-    // This removes the visible fallback-image flash on repeat visits.
     (() => {
       try {
         const cached = JSON.parse(localStorage.getItem("dailyWallpaperCache") || "null");
         if (!cached || !Array.isArray(cached.wallpapers) || !cached.wallpapers.length) return;
-
         const today = new Date();
         const startDate = new Date(2026, 0, 1);
         const millisecondsPerDay = 24 * 60 * 60 * 1000;
-        const dayNumber = Math.floor(
-          (new Date(today.getFullYear(), today.getMonth(), today.getDate()) - startDate) / millisecondsPerDay
-        );
+        const dayNumber = Math.floor((new Date(today.getFullYear(), today.getMonth(), today.getDate()) - startDate) / millisecondsPerDay);
         const index = ((dayNumber % cached.wallpapers.length) + cached.wallpapers.length) % cached.wallpapers.length;
         const wallpaper = cached.wallpapers[index];
-
         if (wallpaper) {
-          document.documentElement.style.setProperty(
-            "--hero-wallpaper",
-            `linear-gradient(90deg, rgba(18,18,18,.04) 0%, rgba(18,18,18,.08) 42%, rgba(18,18,18,.72) 100%), url("${wallpaper}")`
-          );
+          document.documentElement.style.setProperty("--hero-wallpaper", `linear-gradient(90deg, rgba(18,18,18,.04) 0%, rgba(18,18,18,.08) 42%, rgba(18,18,18,.72) 100%), url("${wallpaper}")`);
         }
-      } catch (error) {
-        // The CSS Prometheus fallback remains available if the cache is invalid.
-      }
+      } catch (error) {}
     })();
   </script>
 </head>
@@ -71,26 +61,14 @@
           <h1>Максимум свободи</h1>
           <h3>Вхід безкоштовний та для всіх. Обирай, що подобається</h3>
         </div>
-
         <div class="hero-actions">
           <a class="hero-button discord-button" href="https://discord.gg/HQsZmDKaJ9" style="display:flex;align-items:center;justify-content:center;gap:10px;border:0;border-radius:8px;background:#5865F2;box-shadow:0 6px 18px rgba(88,101,242,.28);">
-            <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
-              <path d="M19.54 5.33A16.4 16.4 0 0 0 15.5 4l-.49 1a15.4 15.4 0 0 0-6.02 0L8.5 4a16.4 16.4 0 0 0-4.04 1.33C1.9 9.3 1.2 13.18 1.55 17a16.6 16.6 0 0 0 4.96 2.5l1.2-1.65c-.66-.24-1.28-.54-1.86-.9l.46-.35c3.58 1.68 7.68 1.68 11.22 0l.46.35c-.58.36-1.2.66-1.86.9l1.2 1.65a16.6 16.6 0 0 0 4.96-2.5c.42-4.42-.72-8.26-2.75-11.67ZM8.48 15.3c-1.1 0-2-.99-2-2.2s.88-2.2 2-2.2 2.02.99 2 2.2c0 1.21-.88 2.2-2 2.2Zm7.04 0c-1.1 0-2-.99-2-2.2s.88-2.2 2-2.2 2.02.99 2 2.2c0 1.21-.88 2.2-2 2.2Z"/>
-            </svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M19.54 5.33A16.4 16.4 0 0 0 15.5 4l-.49 1a15.4 15.4 0 0 0-6.02 0L8.5 4a16.4 16.4 0 0 0-4.04 1.33C1.9 9.3 1.2 13.18 1.55 17a16.6 16.6 0 0 0 4.96 2.5l1.2-1.65c-.66-.24-1.28-.54-1.86-.9l.46-.35c3.58 1.68 7.68 1.68 11.22 0l.46.35c-.58.36-1.2.66-1.86.9l1.2 1.65a16.6 16.6 0 0 0 4.96-2.5c.42-4.42-.72-8.26-2.75-11.67ZM8.48 15.3c-1.1 0-2-.99-2-2.2s.88-2.2 2-2.2 2.02.99 2 2.2c0 1.21-.88 2.2-2 2.2Zm7.04 0c-1.1 0-2-.99-2-2.2s.88-2.2 2-2.2 2.02.99 2 2.2c0 1.21-.88 2.2-2 2.2Z"/></svg>
             <span>Discord</span>
           </a>
-
           <details class="map-dropdown">
-            <summary class="hero-button">
-              <img class="bluemap-icon" src="https://avatars.githubusercontent.com/u/42522657?s=200&v=4" alt="">
-              <span>BlueMap</span>
-            </summary>
-            <div class="map-menu">
-              <a href="#">Minecraft</a>
-              <a href="#">GregTech: New Horizons</a>
-              <a href="#">Hytale</a>
-              <a href="#">Project Zomboid</a>
-            </div>
+            <summary class="hero-button"><img class="bluemap-icon" src="https://avatars.githubusercontent.com/u/42522657?s=200&v=4" alt=""><span>BlueMap</span></summary>
+            <div class="map-menu"><a href="#">Minecraft</a><a href="#">GregTech: New Horizons</a><a href="#">Hytale</a><a href="#">Project Zomboid</a></div>
           </details>
         </div>
       </div>
@@ -100,48 +78,20 @@
       <div class="container">
         <p class="section-label">КАТАЛОГ</p>
         <h1>Доступні сервери</h1>
-
         <div class="server-list" aria-live="polite">
-          <article class="server-card" data-server="minecraft">
-            <div class="server-image"><img src="images/Minecraft_Polytechnic.png" alt="Minecraft"></div>
-            <div class="server-info"><h2>Minecraft</h2><p>У розробці</p></div>
-            <div class="server-status status-stopped" title="Зупинений" aria-label="Зупинений"></div>
-          </article>
-          <article class="server-card" data-server="gtnh">
-            <div class="server-image"><img src="images/gregtechlogo.png" alt="GTNH"></div>
-            <div class="server-info"><h2>GregTech: New Horizons</h2><p>Відкриття на 2.9.x версію.</p></div>
-            <div class="server-status status-stopped" title="Зупинений" aria-label="Зупинений"></div>
-          </article>
-          <article class="server-card" data-server="hytale">
-            <div class="server-image"><img src="images/hytale.png" alt="Hytale"></div>
-            <div class="server-info"><h2>Hytale</h2><p>Відкриття на 2 Chapter.</p></div>
-            <div class="server-status status-stopped" title="Зупинений" aria-label="Зупинений"></div>
-          </article>
-          <article class="server-card" data-server="project-zomboid">
-            <div class="server-image"><img src="images/project-zomboid.png" alt="Project Zomboid"></div>
-            <div class="server-info"><h2>Project Zomboid</h2><p>У пошуках сервера.</p></div>
-            <div class="server-status status-stopped" title="Зупинений" aria-label="Зупинений"></div>
-          </article>
+          <article class="server-card" data-server="minecraft"><div class="server-image"><img src="images/Minecraft_Polytechnic.png" alt="Minecraft"></div><div class="server-info"><h2>Minecraft</h2><p>У розробці</p></div><div class="server-status status-stopped" title="Зупинений" aria-label="Зупинений"></div></article>
+          <article class="server-card" data-server="gtnh"><div class="server-image"><img src="images/gregtechlogo.png" alt="GTNH"></div><div class="server-info"><h2>GregTech: New Horizons</h2><p>Відкриття на 2.9.x версію.</p></div><div class="server-status status-stopped" title="Зупинений" aria-label="Зупинений"></div></article>
+          <article class="server-card" data-server="hytale"><div class="server-image"><img src="images/hytale.png" alt="Hytale"></div><div class="server-info"><h2>Hytale</h2><p>Відкриття на 2 Chapter.</p></div><div class="server-status status-stopped" title="Зупинений" aria-label="Зупинений"></div></article>
+          <article class="server-card" data-server="project-zomboid"><div class="server-image"><img src="images/project-zomboid.png" alt="Project Zomboid"></div><div class="server-info"><h2>Project Zomboid</h2><p>У пошуках сервера.</p></div><div class="server-status status-stopped" title="Зупинений" aria-label="Зупинений"></div></article>
         </div>
       </div>
     </section>
   </main>
 
   <footer id="contact" class="site-footer">
-    <div class="container footer-content">
-      <div><p class="section-label">CONTACT</p><h2>У розробці</h2></div>
-      <div class="contact-links">
-        <a href="mailto:gandrij549@gmail.com" target="_blank">Email</a>
-        <a href="https://github.com/Elon-TuskOFF" target="_blank">GitHub</a>
-        <a href="https://t.me/i731ieh_uhe32" target="_blank">Telegram</a>
-      </div>
-    </div>
-    <div class="container footer-bottom">
-      <span>Сайт зроблено студентом Львівської Політехніки</span>
-      <span>За допомогою HTML, CSS &amp; JS</span>
-    </div>
+    <div class="container footer-content"><div><p class="section-label">CONTACT</p><h2>У розробці</h2></div><div class="contact-links"><a href="mailto:gandrij549@gmail.com" target="_blank">Email</a><a href="https://github.com/Elon-TuskOFF" target="_blank">GitHub</a><a href="https://t.me/i731ieh_uhe32" target="_blank">Telegram</a></div></div>
+    <div class="container footer-bottom"><span>Сайт зроблено студентом Львівської Політехніки</span><span>За допомогою HTML, CSS &amp; JS</span></div>
   </footer>
-
   <script src="./index.js"></script>
 </body>
 </html>
