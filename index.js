@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const catalogDropdown = document.querySelector(".catalog-dropdown");
   const catalogLink = document.querySelector(".catalog-link");
   const heroImage = document.querySelector(".hero-image");
+  const wallpaperSliderTrack = document.querySelector(".wallpaper-slider-track");
 
   filterLinks.forEach((link) => {
     link.addEventListener("click", () => {
@@ -37,13 +38,70 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Change the hero wallpaper once per day.
+  // Change the hero wallpaper once per day and build the desktop hover slider.
   // The wallpaper list is cached locally so the correct image can be chosen
   // synchronously in <head> on the next visit, before the page is painted.
   if (heroImage) {
     const imageExtensions = /\.(avif|gif|jpe?g|png|webp)$/i;
     const repositoryApi = "https://api.github.com/repos/Elon-TuskOFF/Elon-TuskOFF.github.io/contents/everydayimg?ref=Test-4";
     const wallpaperCacheKey = "dailyWallpaperCache";
+
+    const setWallpaper = (wallpaper, index, wallpapers) => {
+      if (!wallpaper) return;
+
+      const background = `linear-gradient(90deg, rgba(18,18,18,.04) 0%, rgba(18,18,18,.08) 42%, rgba(18,18,18,.72) 100%), url("${wallpaper}")`;
+      document.documentElement.style.setProperty("--hero-wallpaper", background);
+
+      if (wallpaperSliderTrack) {
+        wallpaperSliderTrack.querySelectorAll(".wallpaper-slider-item").forEach((item, itemIndex) => {
+          item.classList.toggle("is-active", itemIndex === index);
+        });
+      }
+    };
+
+    const buildWallpaperSlider = (wallpapers) => {
+      if (!wallpaperSliderTrack || wallpapers.length < 2) return;
+
+      wallpaperSliderTrack.replaceChildren();
+
+      wallpapers.forEach((wallpaper, index) => {
+        const item = document.createElement("button");
+        item.type = "button";
+        item.className = "wallpaper-slider-item";
+        item.setAttribute("aria-label", `Шпалери ${index + 1}`);
+        item.title = `Шпалери ${index + 1}`;
+
+        const label = document.createElement("span");
+        label.textContent = String(index + 1).padStart(2, "0");
+        item.appendChild(label);
+
+        // Hovering, rather than clicking, changes the wallpaper.
+        item.addEventListener("mouseenter", () => {
+          setWallpaper(wallpaper, index, wallpapers);
+        });
+
+        wallpaperSliderTrack.appendChild(item);
+      });
+
+      // Mark today's wallpaper as active without requiring a hover.
+      const today = new Date();
+      const startDate = new Date(2026, 0, 1);
+      const millisecondsPerDay = 24 * 60 * 60 * 1000;
+      const dayNumber = Math.floor(
+        (new Date(today.getFullYear(), today.getMonth(), today.getDate()) - startDate) / millisecondsPerDay
+      );
+      const todayIndex = ((dayNumber % wallpapers.length) + wallpapers.length) % wallpapers.length;
+      setWallpaper(wallpapers[todayIndex], todayIndex, wallpapers);
+    };
+
+    // Build immediately from the cache when available, so the slider appears
+    // without waiting for the GitHub API request.
+    try {
+      const cached = JSON.parse(localStorage.getItem(wallpaperCacheKey) || "null");
+      if (cached && Array.isArray(cached.wallpapers) && cached.wallpapers.length) {
+        buildWallpaperSlider(cached.wallpapers);
+      }
+    } catch (error) {}
 
     fetch(repositoryApi, { cache: "no-store" })
       .then((response) => {
@@ -59,13 +117,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!wallpapers.length) throw new Error("No wallpapers found");
 
-        // Save the complete ordered list. The inline script in index.html
-        // can then select today's image without waiting for this API request.
         try {
           localStorage.setItem(wallpaperCacheKey, JSON.stringify({ wallpapers }));
         } catch (error) {
           console.warn("Unable to cache wallpaper list:", error);
         }
+
+        buildWallpaperSlider(wallpapers);
 
         const today = new Date();
         const startDate = new Date(2026, 0, 1);
@@ -74,10 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
           (new Date(today.getFullYear(), today.getMonth(), today.getDate()) - startDate) / millisecondsPerDay
         );
         const index = ((dayNumber % wallpapers.length) + wallpapers.length) % wallpapers.length;
-        const wallpaper = wallpapers[index];
-
-        const background = `linear-gradient(90deg, rgba(18,18,18,.04) 0%, rgba(18,18,18,.08) 42%, rgba(18,18,18,.72) 100%), url("${wallpaper}")`;
-        document.documentElement.style.setProperty("--hero-wallpaper", background);
+        setWallpaper(wallpapers[index], index, wallpapers);
         heroImage.dataset.wallpaperDate = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
       })
       .catch((error) => {
@@ -116,8 +171,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const staticLogo = logoContainer.querySelector(".logo-static");
       if (!staticLogo) return;
 
-      // Never reuse the previous object URL. A new URL forces a fresh GIF
-      // decoder instance instead of continuing from the previous frame.
       animatedLogoUrl = URL.createObjectURL(animatedLogoBlob);
 
       const nextLogo = document.createElement("img");
@@ -183,11 +236,7 @@ async function updateServerStatuses(apiUrl) {
 
       if (!indicator || !status) return;
 
-      indicator.classList.remove(
-        "status-online",
-        "status-restarting",
-        "status-stopped"
-      );
+      indicator.classList.remove("status-online", "status-restarting", "status-stopped");
 
       if (status === "online") {
         indicator.classList.add("status-online");
