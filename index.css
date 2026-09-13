@@ -39,12 +39,22 @@ a:hover { color: var(--accent); }
 
 /* Hero image: 1199x637 */
 .hero-section { position: relative; width: 100%; aspect-ratio: 1199 / 637; min-height: 560px; overflow: hidden; background: var(--background); }
-.hero-image { position: absolute; inset: 0; background-image: var(--hero-wallpaper, linear-gradient(90deg, rgba(18,18,18,.04) 0%, rgba(18,18,18,.08) 42%, rgba(18,18,18,.72) 100%), url("images/Prometheus.jpg")); background-position: center; background-size: cover; background-repeat: no-repeat; opacity: .9; }
+.hero-image { position: absolute; inset: 0; background-image: var(--hero-wallpaper, linear-gradient(90deg, rgba(18,18,18,.04) 0%, rgba(18,18,18,.08) 42%, rgba(18,18,18,.72) 100%), url("images/Prometheus.jpg")); background-position: center; background-size: cover; background-repeat: no-repeat; opacity: .9; transition: background-image .18s ease; }
 .hero-image::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(18,18,18,0) 55%, rgba(18,18,18,.35) 70%, rgba(18,18,18,.78) 84%, var(--background) 100%); pointer-events: none; }
 .hero-content { position: relative; z-index: 1; min-height: 560px; height: 100%; display: flex; flex-direction: column; align-items: flex-end; }
 .hero-copy { width: min(500px, 48%); padding: 120px 0 0; text-align: right; }
 .hero-copy h1 { margin: 0 0 18px; color: #fff; font-size: clamp(46px, 6vw, 78px); line-height: .98; letter-spacing: -.045em; }
 .hero-copy h3 { margin: 0; color: #e0e0e0; font-size: clamp(17px, 2vw, 23px); font-weight: 500; line-height: 1.45; }
+
+/* Desktop-only wallpaper hover slider */
+.wallpaper-slider { position: absolute; left: 0; top: 50%; z-index: 5; width: 44px; transform: translateY(-50%); padding: 12px 0; }
+.wallpaper-slider-track { display: flex; flex-direction: column; align-items: flex-start; gap: 7px; }
+.wallpaper-slider-item { display: flex; align-items: center; width: 44px; min-height: 25px; padding: 4px 8px 4px 0; border: 0; border-radius: 0 7px 7px 0; background: rgba(18,18,18,.62); color: rgba(255,255,255,.48); font: 700 10px/1 Arial, Helvetica, sans-serif; cursor: pointer; overflow: hidden; white-space: nowrap; transition: width .2s ease, padding .2s ease, color .2s ease, background .2s ease; backdrop-filter: blur(5px); }
+.wallpaper-slider-item::before { content: ""; width: 3px; height: 17px; flex: 0 0 3px; margin-right: 8px; border-radius: 0 2px 2px 0; background: currentColor; opacity: .9; }
+.wallpaper-slider-item:hover, .wallpaper-slider-item.is-active { width: 76px; padding-right: 12px; color: #fff; background: rgba(25,25,25,.88); }
+.wallpaper-slider-item:hover { color: #fff; }
+.wallpaper-slider-item span { opacity: .78; transition: opacity .2s ease; }
+.wallpaper-slider-item:hover span, .wallpaper-slider-item.is-active span { opacity: 1; }
 
 /* Hero buttons */
 .hero-actions { width: 100%; margin-top: 190px; display: flex; justify-content: center; align-items: flex-start; gap: 16px; }
@@ -96,6 +106,7 @@ h1, h2, p { margin-top: 0; }
 
 @media (max-width: 760px) {
   .site-header { position: static; }
+  .wallpaper-slider { display: none; }
   .navigation { min-height: 60px; }
   .site-logo { max-width: 55vw; overflow: hidden; font-size: 11px; }
   .logo-title { overflow: hidden; text-overflow: ellipsis; }
