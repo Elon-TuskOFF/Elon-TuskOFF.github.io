@@ -8,16 +8,6 @@
   <link rel="preload" as="image" href="images/Minecraft_Polytechnic.png">
   <link rel="stylesheet" href="./index.css">
   <link rel="icon" type="img" href="images/Minecraft_Polytechnic.png">
-  <script>
-    (() => {
-      try {
-        const cached = JSON.parse(localStorage.getItem("wallpaperCache") || "null");
-        if (!cached || !Array.isArray(cached.wallpapers) || !cached.wallpapers.length) return;
-        const wallpaper = cached.wallpapers[cached.index % cached.wallpapers.length];
-        if (wallpaper) document.documentElement.style.setProperty("--hero-wallpaper", `linear-gradient(90deg, rgba(18,18,18,.04) 0%, rgba(18,18,18,.08) 42%, rgba(18,18,18,.72) 100%), url("${wallpaper}")`);
-      } catch (error) {}
-    })();
-  </script>
 </head>
 <body>
   <header class="site-header">
