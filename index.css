@@ -23,7 +23,7 @@ a:hover { color: var(--accent); }
 .catalog-menu a { display: block; padding: 12px 14px; color: #fff; font-size: 15px; }
 .catalog-menu a:hover { color: #fff; background: #222; }
 .hero-section { position: relative; width: 100%; aspect-ratio: 1199 / 637; min-height: 560px; overflow: hidden; background: var(--background); }
-.hero-image { position: absolute; inset: 0; background-image: var(--hero-wallpaper, linear-gradient(90deg, rgba(18,18,18,.04) 0%, rgba(18,18,18,.08) 42%, rgba(18,18,18,.72) 100%), url("images/Prometheus.jpg")); background-position: center; background-size: cover; background-repeat: no-repeat; opacity: .9; transition: opacity .45s ease, transform .9s ease; }
+.hero-image { position: absolute; inset: 0; background-image: var(--hero-wallpaper); background-position: center; background-size: cover; background-repeat: no-repeat; opacity: .9; transition: opacity .45s ease, transform .9s ease; }
 .hero-image.wallpaper-changing { opacity: .15; transform: scale(1.025); }
 .hero-image::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(18,18,18,0) 55%, rgba(18,18,18,.35) 70%, rgba(18,18,18,.78) 84%, var(--background) 100%); pointer-events: none; }
 .hero-content { position: relative; z-index: 1; min-height: 560px; height: 100%; display: flex; flex-direction: column; align-items: flex-end; }
