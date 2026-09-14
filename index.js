@@ -39,13 +39,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Automatically rotate hero wallpapers every 10 seconds.
-  // The list is cached so the current wallpaper can be restored immediately.
+  // Automatically rotate hero wallpapers every 7 seconds.
+  // No old wallpaper cache is used, so the page cannot briefly restore a stale image.
   if (heroImage) {
     const imageExtensions = /\.(avif|gif|jpe?g|png|webp)$/i;
     const repositoryApi = "https://api.github.com/repos/Elon-TuskOFF/Elon-TuskOFF.github.io/contents/everydayimg?ref=Test-4";
-    const wallpaperCacheKey = "wallpaperCache";
-    const rotationInterval = 10000;
+    const rotationInterval = 7000;
     let wallpapers = [];
     let currentIndex = 0;
     let rotationTimer = null;
@@ -65,7 +64,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      // Fade out, swap the image, then fade back in for a smooth transition.
       heroImage.classList.add("wallpaper-changing");
       window.setTimeout(() => {
         document.documentElement.style.setProperty("--hero-wallpaper", background);
@@ -80,28 +78,8 @@ document.addEventListener("DOMContentLoaded", () => {
       rotationTimer = window.setInterval(() => {
         currentIndex = (currentIndex + 1) % wallpapers.length;
         setWallpaper(wallpapers[currentIndex]);
-        try {
-          localStorage.setItem(wallpaperCacheKey, JSON.stringify({ wallpapers, index: currentIndex }));
-        } catch (error) {}
       }, rotationInterval);
     };
-
-    const applyWallpaperList = (list, initialIndex = 0) => {
-      wallpapers = list;
-      if (!wallpapers.length) return;
-      currentIndex = ((initialIndex % wallpapers.length) + wallpapers.length) % wallpapers.length;
-      preloadImage(wallpapers[currentIndex]);
-      setWallpaper(wallpapers[currentIndex], false);
-      wallpapers.forEach(preloadImage);
-      startRotation();
-    };
-
-    try {
-      const cached = JSON.parse(localStorage.getItem(wallpaperCacheKey) || "null");
-      if (cached && Array.isArray(cached.wallpapers) && cached.wallpapers.length) {
-        applyWallpaperList(cached.wallpapers, Number.isInteger(cached.index) ? cached.index : 0);
-      }
-    } catch (error) {}
 
     fetch(repositoryApi, { cache: "no-store" })
       .then((response) => {
@@ -116,10 +94,12 @@ document.addEventListener("DOMContentLoaded", () => {
           .filter(Boolean);
 
         if (!freshWallpapers.length) throw new Error("No wallpapers found");
-        applyWallpaperList(freshWallpapers, 0);
-        try {
-          localStorage.setItem(wallpaperCacheKey, JSON.stringify({ wallpapers: freshWallpapers, index: 0 }));
-        } catch (error) {}
+        wallpapers = freshWallpapers;
+        currentIndex = 0;
+        preloadImage(wallpapers[currentIndex]);
+        setWallpaper(wallpapers[currentIndex], false);
+        wallpapers.forEach(preloadImage);
+        startRotation();
       })
       .catch((error) => console.warn("Unable to load wallpapers:", error));
   }
