@@ -10,7 +10,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const wallpaperSliderTrack = document.querySelector(".wallpaper-slider-track");
 
   filterLinks.forEach((link) => {
-    link.addEventListener("click", () => {
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+
       const selectedServer = link.dataset.filter;
 
       serverCards.forEach((card) => {
@@ -21,6 +23,22 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       catalogDropdown?.classList.remove("is-open");
+
+      // Scroll the catalog slightly below the pinned header so there is
+      // comfortable breathing room between the header and the section title.
+      const catalogSection = document.querySelector("#catalog");
+      const siteHeader = document.querySelector(".site-header");
+
+      if (catalogSection) {
+        const headerHeight = siteHeader?.getBoundingClientRect().height || 0;
+        const extraGap = 36;
+        const targetY = window.scrollY + catalogSection.getBoundingClientRect().top - headerHeight - extraGap;
+
+        window.scrollTo({
+          top: Math.max(0, targetY),
+          behavior: "smooth"
+        });
+      }
     });
   });
 
