@@ -6,7 +6,7 @@ a { color:var(--primary-text); text-decoration:none; }
 a:hover { color:var(--accent); }
 .container,.navigation { width:min(1100px,calc(100% - 40px)); margin:0 auto; }
 .mouse-glow { position:fixed; z-index:9999; left:0; top:0; width:120px; height:120px; border-radius:50%; pointer-events:none; transform:translate(-50%,-50%); background:radial-gradient(circle,rgba(255,255,255,.14) 0%,rgba(255,255,255,.05) 32%,rgba(255,255,255,0) 72%); filter:blur(5px); opacity:0; transition:opacity .2s ease; mix-blend-mode:screen; }
-.site-header { position:absolute; top:0; left:0; width:100%; z-index:20; padding:16px 0; background:transparent; backdrop-filter:none; border:0; box-shadow:none; }
+.site-header { position:fixed; top:0; left:0; width:100%; z-index:20; padding:16px 0; background:transparent; backdrop-filter:none; border:0; box-shadow:none; }
 .navigation { min-height:56px; display:flex; align-items:center; justify-content:space-between; gap:48px; }
 .site-logo { display:flex; align-items:center; gap:12px; min-height:56px; padding:8px 16px 8px 10px; color:var(--primary-text); font-size:14px; font-weight:700; letter-spacing:.12em; white-space:nowrap; border:1px solid var(--border); border-radius:14px; background:rgba(24,24,24,.94); box-shadow:0 8px 24px rgba(0,0,0,.18); }
 .site-logo:hover { color:var(--primary-text); border-color:#555; }
