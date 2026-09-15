@@ -3,10 +3,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const heroImage = document.querySelector(".hero-image");
   const logo = document.querySelector(".site-logo-image");
 
-  // Every catalog option shows the complete catalog.
-  document.querySelector(".catalog-menu")?.addEventListener("click", () => {
-    catalog?.scrollIntoView({ behavior: "smooth", block: "start" });
-    document.querySelector(".catalog-dropdown")?.removeAttribute("open");
+  // Clicking any Catalog item always jumps to the full server catalog.
+  document.querySelectorAll(".catalog-menu button").forEach((button) => {
+    button.addEventListener("click", () => {
+      catalog?.scrollIntoView({ behavior: "smooth", block: "start" });
+      document.querySelector(".catalog-dropdown")?.removeAttribute("open");
+    });
   });
 
   // Rotate hero wallpapers every 7 seconds.
