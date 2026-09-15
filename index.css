@@ -14,14 +14,21 @@ a:hover { color: var(--accent); }
 .navigation-links { display: flex; align-items: center; gap: 28px; }
 .navigation-links > a, .catalog-link { color: #fff; font-size: 16px; font-weight: 600; transition: color .2s ease; }
 .navigation-links > a:hover, .catalog-link:hover { color: #fff; }
+.catalog-link { list-style: none; }
+.catalog-link::-webkit-details-marker { display: none; }
 .catalog-link::after { content: ""; display: inline-block; width: 7px; height: 7px; margin-left: 8px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: translateY(-2px) rotate(45deg); transition: transform .18s ease; }
-.catalog-dropdown:hover .catalog-link::after, .catalog-dropdown:focus-within .catalog-link::after, .catalog-dropdown.is-open .catalog-link::after { transform: translateY(1px) rotate(225deg); }
+.catalog-dropdown[open] .catalog-link::after { transform: translateY(1px) rotate(225deg); }
 .catalog-dropdown { position: relative; padding: 24px 0; }
 .catalog-dropdown::after { content: ""; position: absolute; left: -20px; right: -20px; bottom: -12px; height: 20px; }
 .catalog-menu { position: absolute; top: calc(100% - 1px); right: -18px; width: 220px; padding: 8px; border: 1px solid var(--border); background: #181818; box-shadow: 0 12px 35px rgba(0,0,0,.35); opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(-6px); transition: opacity .18s ease, transform .18s ease, visibility .18s ease; }
-.catalog-dropdown:hover .catalog-menu, .catalog-dropdown:focus-within .catalog-menu, .catalog-dropdown.is-open .catalog-menu { opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0); }
-.catalog-menu a { display: block; padding: 12px 14px; color: #fff; font-size: 15px; }
-.catalog-menu a:hover { color: #fff; background: #222; }
+.catalog-dropdown:hover .catalog-menu, .catalog-dropdown:focus-within .catalog-menu, .catalog-dropdown[open] .catalog-menu { opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0); }
+.catalog-menu label { display: block; padding: 12px 14px; color: #fff; font-size: 15px; cursor: pointer; }
+.catalog-menu label:hover { color: #fff; background: #222; }
+.server-filter { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+body:has(#filter-minecraft:checked) [data-server]:not([data-server="minecraft"]),
+body:has(#filter-gtnh:checked) [data-server]:not([data-server="gtnh"]),
+body:has(#filter-hytale:checked) [data-server]:not([data-server="hytale"]),
+body:has(#filter-project-zomboid:checked) [data-server]:not([data-server="project-zomboid"]) { display: none; }
 .hero-section { position: relative; width: 100%; aspect-ratio: 1199 / 637; min-height: 560px; overflow: hidden; background: var(--background); }
 .hero-image { position: absolute; inset: 0; background-image: var(--hero-wallpaper); background-position: center; background-size: cover; background-repeat: no-repeat; opacity: .9; transition: opacity .45s ease, transform .9s ease; }
 .hero-image.wallpaper-changing { opacity: .15; transform: scale(1.025); }
