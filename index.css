@@ -23,11 +23,8 @@ a:hover { color:var(--accent); }
 .catalog-dropdown::after { content:""; position:absolute; left:-20px; right:-20px; bottom:-12px; height:20px; }
 .catalog-menu { position:absolute; top:calc(100% + 9px); right:0; width:230px; padding:8px; border:1px solid var(--border); border-radius:12px; background:#181818; box-shadow:0 12px 35px rgba(0,0,0,.4); opacity:0; visibility:hidden; pointer-events:none; transform:translateY(-6px); transition:opacity .18s ease,transform .18s ease,visibility .18s ease; }
 .catalog-dropdown:hover .catalog-menu,.catalog-dropdown:focus-within .catalog-menu,.catalog-dropdown[open] .catalog-menu { opacity:1; visibility:visible; pointer-events:auto; transform:translateY(0); }
-.catalog-menu label { display:block; padding:12px 14px; color:#fff; font-size:15px; cursor:pointer; border-radius:8px; }
-.catalog-menu label:hover { color:#fff; background:#222; }
-.server-filter { position:fixed; left:-10000px; top:-10000px; width:1px; height:1px; opacity:0; pointer-events:none; }
-body:has(#filter-all:checked) .server-card { display:grid; }
-body:has(#filter-minecraft:checked) [data-server]:not([data-server="minecraft"]),body:has(#filter-gtnh:checked) [data-server]:not([data-server="gtnh"]),body:has(#filter-hytale:checked) [data-server]:not([data-server="hytale"]),body:has(#filter-project-zomboid:checked) [data-server]:not([data-server="project-zomboid"]) { display:none; }
+.catalog-menu button { display:block; width:100%; padding:12px 14px; color:#fff; font:inherit; font-size:15px; text-align:left; cursor:pointer; border:0; border-radius:8px; background:transparent; }
+.catalog-menu button:hover { color:#fff; background:#222; }
 .hero-section { position:relative; width:100%; aspect-ratio:1199/637; min-height:560px; overflow:hidden; background:var(--background); }
 .hero-image { position:absolute; inset:0; background-image:var(--hero-wallpaper); background-position:center; background-size:cover; background-repeat:no-repeat; opacity:.9; transition:opacity .45s ease,transform .9s ease; }
 .hero-image.wallpaper-changing { opacity:.15; transform:scale(1.025); }
