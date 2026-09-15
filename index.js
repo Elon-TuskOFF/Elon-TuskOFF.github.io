@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Rotate hero wallpapers every 7 seconds.
   if (heroImage) {
     const folder = "https://api.github.com/repos/Elon-TuskOFF/Elon-TuskOFF.github.io/contents/everydayimg?ref=Test-4";
-    const imageFile = /\.(avif|gif|jpe?g|png|webp)$/i;
+    const imageFile = /\.(jpe?g|png)$/i;
     let wallpapers = [];
     let current = 0;
 
@@ -58,7 +58,6 @@ document.addEventListener("DOMContentLoaded", () => {
       .catch((error) => console.warn("Unable to load wallpapers:", error));
   }
 
-  // Restart the animated logo from its first frame on every hover.
   if (logo) {
     const staticSrc = "images/Minecraft_Polytechnic.png";
     const animatedSrc = "gifs/animated_minecraftPoly.gif";
