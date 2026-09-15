@@ -4,6 +4,22 @@ document.addEventListener("DOMContentLoaded", () => {
   const logoContainer = document.querySelector(".site-logo-image");
   const heroImage = document.querySelector(".hero-image");
   const mouseGlow = document.querySelector(".mouse-glow");
+  const catalog = document.querySelector("#catalog");
+
+  // Header catalog: select the filter and then scroll to the actual catalog.
+  document.querySelectorAll(".catalog-menu label[for]").forEach((label) => {
+    label.addEventListener("click", () => {
+      const filter = document.getElementById(label.htmlFor);
+      if (filter) filter.checked = true;
+      if (catalog) {
+        window.requestAnimationFrame(() => {
+          catalog.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      }
+      const dropdown = label.closest("details");
+      if (dropdown) dropdown.removeAttribute("open");
+    });
+  });
 
   // Follow the pointer with a soft glow. Disabled automatically on touch devices via CSS.
   if (mouseGlow && window.matchMedia("(pointer: fine)").matches) {
