@@ -3,14 +3,13 @@
 document.addEventListener("DOMContentLoaded", () => {
   const logoContainer = document.querySelector(".site-logo-image");
   const heroImage = document.querySelector(".hero-image");
-  const mouseGlow = document.querySelector(".mouse-glow");
   const catalog = document.querySelector("#catalog");
 
-  // Header catalog: select the filter and then scroll to the actual catalog.
+  // Header catalog: all options now open the full catalog without filtering any servers.
   document.querySelectorAll(".catalog-menu label[for]").forEach((label) => {
     label.addEventListener("click", () => {
-      const filter = document.getElementById(label.htmlFor);
-      if (filter) filter.checked = true;
+      const filterAll = document.getElementById("filter-all");
+      if (filterAll) filterAll.checked = true;
       if (catalog) {
         window.requestAnimationFrame(() => {
           catalog.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -20,20 +19,6 @@ document.addEventListener("DOMContentLoaded", () => {
       if (dropdown) dropdown.removeAttribute("open");
     });
   });
-
-  // Follow the pointer with a soft glow. Disabled automatically on touch devices via CSS.
-  if (mouseGlow && window.matchMedia("(pointer: fine)").matches) {
-    let glowX = window.innerWidth / 2;
-    let glowY = window.innerHeight / 2;
-    let targetX = glowX;
-    let targetY = glowY;
-    let visible = false;
-    const moveGlow = () => { glowX += (targetX-glowX)*0.16; glowY += (targetY-glowY)*0.16; mouseGlow.style.left=`${glowX}px`; mouseGlow.style.top=`${glowY}px`; requestAnimationFrame(moveGlow); };
-    window.addEventListener("pointermove", (event) => { targetX=event.clientX; targetY=event.clientY; if (!visible) { visible=true; mouseGlow.style.opacity="1"; } });
-    window.addEventListener("pointerleave", () => { mouseGlow.style.opacity="0"; });
-    window.addEventListener("pointerenter", () => { mouseGlow.style.opacity="1"; });
-    requestAnimationFrame(moveGlow);
-  }
 
   // Automatically rotate hero wallpapers every 7 seconds.
   if (heroImage) {
