@@ -1,43 +1,8 @@
-// Server catalog filtering and live status updates.
+// Lightweight JavaScript only for behavior that CSS/HTML cannot handle.
 
 document.addEventListener("DOMContentLoaded", () => {
-  const filterLinks = document.querySelectorAll("[data-filter]");
-  const serverCards = document.querySelectorAll("[data-server]");
   const logoContainer = document.querySelector(".site-logo-image");
-  const catalogDropdown = document.querySelector(".catalog-dropdown");
-  const catalogLink = document.querySelector(".catalog-link");
   const heroImage = document.querySelector(".hero-image");
-
-  filterLinks.forEach((link) => {
-    link.addEventListener("click", (event) => {
-      event.preventDefault();
-      const selectedServer = link.dataset.filter;
-      serverCards.forEach((card) => {
-        const showAll = selectedServer === "all";
-        card.hidden = !showAll && card.dataset.server !== selectedServer;
-      });
-      catalogDropdown?.classList.remove("is-open");
-
-      const catalogSection = document.querySelector("#catalog");
-      const siteHeader = document.querySelector(".site-header");
-      if (catalogSection) {
-        const headerHeight = siteHeader?.getBoundingClientRect().height || 0;
-        const extraGap = 36;
-        const targetY = window.scrollY + catalogSection.getBoundingClientRect().top - headerHeight - extraGap;
-        window.scrollTo({ top: Math.max(0, targetY), behavior: "smooth" });
-      }
-    });
-  });
-
-  if (catalogDropdown && catalogLink) {
-    catalogLink.addEventListener("click", (event) => {
-      event.preventDefault();
-      catalogDropdown.classList.toggle("is-open");
-    });
-    document.addEventListener("click", (event) => {
-      if (!catalogDropdown.contains(event.target)) catalogDropdown.classList.remove("is-open");
-    });
-  }
 
   // Automatically rotate hero wallpapers every 7 seconds.
   // No old wallpaper cache is used, so the page cannot briefly restore a stale image.
