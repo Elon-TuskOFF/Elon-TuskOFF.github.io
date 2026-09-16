@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const heroImage = document.querySelector(".hero-image");
   const logo = document.querySelector(".site-logo-image");
 
-  // Rotate hero wallpapers every 7 seconds.
+  // Changing wallpapers every 7 seconds.
   if (heroImage) {
     const folder = "https://api.github.com/repos/Elon-TuskOFF/Elon-TuskOFF.github.io/contents/everydayimg?ref=Test-4";
     const imageFile = /\.(jpe?g|png)$/i;
