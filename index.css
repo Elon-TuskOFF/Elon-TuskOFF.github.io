@@ -24,7 +24,7 @@ a:hover { color:var(--accent); }
 .navigation-links > a { padding:11px 14px; border-radius:9px; }
 .navigation-links > a:hover,.catalog-link:hover { color:var(--white); background:var(--hover); }
 
-.catalog-link { list-style:none; padding:11px 14px; border-radius:9px; }
+.catalog-link { list-style:none; padding:11px 14px; border-radius:9px; cursor:pointer; }
 .catalog-link::-webkit-details-marker { display:none; }
 .catalog-link::after { content:""; display:inline-block; width:7px; height:7px; margin-left:8px; border-right:1.5px solid currentColor; border-bottom:1.5px solid currentColor; transform:translateY(-2px) rotate(45deg); transition:transform .18s ease; }
 .catalog-dropdown[open] .catalog-link::after { transform:translateY(1px) rotate(225deg); }
@@ -32,7 +32,7 @@ a:hover { color:var(--accent); }
 .catalog-dropdown::after { content:""; position:absolute; left:-20px; right:-20px; bottom:-12px; height:20px; }
 .catalog-menu { position:absolute; top:calc(100% + 9px); right:0; width:230px; padding:8px; border:1px solid var(--border); border-radius:12px; background:var(--surface); box-shadow:0 12px 35px var(--shadow-strong); opacity:0; visibility:hidden; pointer-events:none; transform:translateY(-6px); transition:opacity .18s ease,transform .18s ease,visibility .18s ease; }
 .catalog-dropdown:hover .catalog-menu,.catalog-dropdown:focus-within .catalog-menu,.catalog-dropdown[open] .catalog-menu { opacity:1; visibility:visible; pointer-events:auto; transform:translateY(0); }
-.catalog-menu a { display:block; width:100%; padding:12px 14px; color:var(--white); font-size:15px; text-align:left; border-radius:8px; }
+.catalog-menu a { display:block; width:100%; padding:12px 14px; color:var(--white); font-size:15px; text-align:left; border-radius:8px; cursor:pointer; }
 .catalog-menu a:hover,.catalog-menu a:focus-visible { color:var(--white); background:var(--hover); }
 .catalog-menu a:focus-visible { outline:2px solid var(--accent); outline-offset:-2px; }
 .catalog-section { min-height:calc(100vh - 68px); padding:25px 0 120px; scroll-margin-top:88px; }
