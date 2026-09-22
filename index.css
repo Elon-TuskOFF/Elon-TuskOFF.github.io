@@ -98,6 +98,49 @@ h1,h2,p { margin-top:0; }
 .contact-links a:hover { color:var(--white); border-color:var(--accent); }
 
 /* mobile */
-@media (max-width:760px) { .site-header{position:fixed;padding:10px 0}.navigation{min-height:60px;gap:22px}.site-logo{max-width:55vw;min-height:52px;overflow:hidden;font-size:11px}.logo-title{overflow:hidden;text-overflow:ellipsis}.site-logo-image{width:32px;height:32px;flex-basis:32px}.navigation-links{gap:2px;min-height:52px}.navigation-links>a,.catalog-link{font-size:14px;padding:10px 11px}.catalog-dropdown{padding:0}.catalog-menu{right:-8px}.hero-section{aspect-ratio:1199/637;min-height:430px}.hero-image{background-position:center center}.hero-content{min-height:430px;align-items:flex-end}.hero-copy{width:100%;padding:85px 0 0;text-align:center}.hero-copy h1{font-size:clamp(42px,12vw,64px)}.hero-copy h3{max-width:430px;margin:0 auto;font-size:17px}.hero-actions{margin-top:110px;gap:10px}.hero-button{min-width:145px;padding:12px 17px}.catalog-section{padding:20px 0 90px;scroll-margin-top:76px}.server-card{grid-template-columns:64px minmax(0,1fr) 14px;gap:15px;padding-right:16px}.server-image{width:64px;height:64px}.server-info h2{font-size:16px}.server-info p{font-size:13px}.footer-content,.footer-bottom{flex-direction:column;align-items:flex-start}.contact-links a{font-size:15px}.mouse-glow{width:100px;height:100px} }
-@media (max-width:480px) { .container,.navigation{width:min(100% - 28px,1100px)}.navigation{gap:14px}.site-logo{max-width:57vw;font-size:10px;gap:8px;padding-right:10px}.site-logo-image{width:28px;height:28px;flex-basis:28px}.navigation-links{gap:0}.navigation-links>a,.catalog-link{font-size:13px;padding:9px 8px}.catalog-menu{right:-10px}.hero-section{aspect-ratio:1199/637;min-height:390px}.hero-content{min-height:390px}.hero-copy{padding:72px 0 0}.hero-copy h1{font-size:43px}.hero-actions{margin-top:95px}.hero-button{min-width:130px;padding:11px 13px;font-size:14px}.map-menu{width:210px} }
+@media (max-width:760px) {
+  html { scroll-padding-top:142px; }
+  .site-header { position:fixed; padding:8px 0; }
+  .navigation { min-height:0; flex-direction:column; align-items:stretch; gap:8px; }
+  .site-logo { width:100%; max-width:none; min-height:48px; height:48px; justify-content:flex-start; overflow:hidden; font-size:11px; }
+  .logo-title { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .site-logo-image { width:32px; height:32px; flex-basis:32px; }
+  .navigation-links { width:100%; min-height:48px; justify-content:center; gap:4px; }
+  .navigation-links>a,.catalog-link { font-size:14px; padding:9px 12px; }
+  .catalog-dropdown { padding:0; }
+  .catalog-menu { right:0; }
+  .hero-section { aspect-ratio:1199/637; min-height:500px; }
+  .hero-image { background-position:center center; }
+  .hero-content { min-height:500px; align-items:center; }
+  .hero-copy { width:100%; max-width:620px; padding:155px 18px 0; text-align:center; }
+  .hero-copy h1 { margin-bottom:20px; font-size:clamp(42px,12vw,64px); line-height:1.02; }
+  .hero-copy h3 { max-width:560px; margin:0 auto; font-size:17px; line-height:1.5; }
+  .hero-actions { margin-top:90px; gap:10px; }
+  .hero-button { min-width:145px; padding:12px 17px; }
+  .catalog-section { padding:20px 0 90px; scroll-margin-top:142px; }
+  .server-card { grid-template-columns:64px minmax(0,1fr) 14px; gap:15px; padding-right:16px; }
+  .server-image { width:64px; height:64px; }
+  .server-info h2 { font-size:16px; }
+  .server-info p { font-size:13px; }
+  .footer-content,.footer-bottom { flex-direction:column; align-items:flex-start; }
+  .contact-links a { font-size:15px; }
+  .mouse-glow { width:100px; height:100px; }
+}
+@media (max-width:480px) {
+  .container,.navigation { width:min(100% - 24px,1100px); }
+  .navigation { gap:7px; }
+  .site-logo { min-height:46px; height:46px; font-size:10px; gap:8px; padding-right:10px; }
+  .site-logo-image { width:28px; height:28px; flex-basis:28px; }
+  .navigation-links { min-height:46px; gap:0; justify-content:space-evenly; }
+  .navigation-links>a,.catalog-link { font-size:13px; padding:9px 10px; }
+  .catalog-menu { right:0; }
+  .hero-section { aspect-ratio:auto; min-height:500px; }
+  .hero-content { min-height:500px; }
+  .hero-copy { padding:150px 12px 0; }
+  .hero-copy h1 { max-width:100%; font-size:43px; }
+  .hero-copy h3 { max-width:360px; font-size:16px; }
+  .hero-actions { margin-top:82px; }
+  .hero-button { min-width:130px; padding:11px 13px; font-size:14px; }
+  .map-menu { width:210px; }
+}
 @media (pointer:coarse) { .mouse-glow { display:none; } }
