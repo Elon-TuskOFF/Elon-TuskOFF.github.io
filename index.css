@@ -132,9 +132,9 @@ h1,h2,p { margin-top:0; }
   .hero-button { min-width:145px; padding:12px 17px; }
   .catalog-section { padding:20px 0 90px; scroll-margin-top:142px; }
   .server-card { grid-template-columns:64px minmax(0,1fr) 14px; gap:15px; padding-right:16px; }
-  .server-card-summary { grid-template-columns:64px minmax(0,1fr) 14px; gap:15px; min-height:90px; }
-  .server-card-summary::after { right:22px; }
-  .minecraft-live-summary { right:40px; }
+  .server-card-summary { grid-template-columns:64px minmax(0,1fr) 14px; grid-template-rows:auto auto; gap:4px 15px; min-height:90px; padding:13px 0; }
+  .server-card-summary::after { right:22px; top:32px; }
+  .minecraft-live-summary { position:static; grid-column:2 / 3; grid-row:2; justify-self:end; max-width:100%; margin:0 !important; transform:none; padding-right:20px; overflow:hidden; text-overflow:ellipsis; text-align:right; white-space:nowrap; font-size:12px; line-height:1.35; }
   .minecraft-player-panel { margin-left:79px; }
   .server-image { width:64px; height:64px; }
   .server-info h2 { font-size:16px; }
@@ -159,6 +159,7 @@ h1,h2,p { margin-top:0; }
   .hero-copy h3 { max-width:360px; font-size:16px; }
   .hero-actions { margin-top:82px; }
   .hero-button { min-width:130px; padding:11px 13px; font-size:14px; }
+  .minecraft-live-summary { font-size:11px; padding-right:18px; }
   .map-menu { width:210px; }
 }
 @media (pointer:coarse) { .mouse-glow { display:none; } }
