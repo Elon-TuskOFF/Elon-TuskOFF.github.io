@@ -58,6 +58,80 @@ document.addEventListener("DOMContentLoaded", () => {
       .catch((error) => console.warn("Unable to load wallpapers:", error));
   }
 
+  // Live Minecraft status via Cloudflare Worker -> MCSrvStat.
+  const minecraftCard = document.querySelector(".minecraft-card");
+  if (minecraftCard) {
+    const statusDot = minecraftCard.querySelector(".server-status");
+    const liveSummary = minecraftCard.querySelector(".minecraft-live-summary");
+    const playerPanel = minecraftCard.querySelector(".minecraft-player-panel");
+    const playerCount = minecraftCard.querySelector(".minecraft-player-count");
+    const playerList = minecraftCard.querySelector(".minecraft-player-list");
+    const statusApi = "https://minecraft-status.gandrij549.workers.dev/?server=minecraft";
+
+    const setStatus = (className, title, label) => {
+      statusDot.className = `server-status ${className}`;
+      statusDot.title = title;
+      statusDot.setAttribute("aria-label", label);
+    };
+
+    const loadMinecraftStatus = async () => {
+      try {
+        setStatus("status-checking", "Перевірка статусу", "Перевірка статусу");
+        liveSummary.textContent = "Перевірка статусу…";
+
+        const response = await fetch(statusApi, { cache: "no-store" });
+        if (!response.ok) throw new Error(`Status API returned ${response.status}`);
+
+        const data = await response.json();
+        const online = data.online === true;
+        const onlinePlayers = Number(data.players?.online ?? 0);
+        const maxPlayers = Number(data.players?.max ?? 0);
+        const players = Array.isArray(data.players?.list) ? data.players.list : [];
+
+        if (!online) {
+          setStatus("status-stopped", "Зупинений", "Зупинений");
+          liveSummary.textContent = "Сервер офлайн";
+          playerCount.textContent = "Гравці недоступні";
+          playerList.replaceChildren();
+          return;
+        }
+
+        setStatus("status-online", "Онлайн", "Онлайн");
+        liveSummary.textContent = `${onlinePlayers} / ${maxPlayers || "?"} гравців онлайн`;
+        playerCount.textContent = players.length
+          ? "Гравці онлайн:"
+          : onlinePlayers > 0
+            ? "Список гравців недоступний"
+            : "Немає гравців онлайн";
+
+        playerList.replaceChildren();
+        players.forEach((player) => {
+          const name = typeof player === "string" ? player : player?.name;
+          if (!name) return;
+          const item = document.createElement("li");
+          item.textContent = name;
+          playerList.appendChild(item);
+        });
+      } catch (error) {
+        console.warn("Unable to load Minecraft status:", error);
+        setStatus("status-checking", "Статус недоступний", "Статус недоступний");
+        liveSummary.textContent = "Статус тимчасово недоступний";
+        playerCount.textContent = "Не вдалося отримати список гравців";
+        playerList.replaceChildren();
+      }
+    };
+
+    minecraftCard.addEventListener("toggle", () => {
+      if (minecraftCard.open) {
+        playerPanel.hidden = false;
+        loadMinecraftStatus();
+      }
+    });
+
+    loadMinecraftStatus();
+    setInterval(loadMinecraftStatus, 300000);
+  }
+
   if (logo) {
     const staticSrc = "images/Minecraft_Polytechnic.png";
     const animatedSrc = "gifs/animated_minecraftPoly.gif";
