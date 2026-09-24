@@ -43,10 +43,10 @@ a:hover { color:var(--accent); }
 .minecraft-card { display:grid; grid-template-columns:1fr; gap:0; }
 .server-card summary { list-style:none; }
 .server-card summary::-webkit-details-marker { display:none; }
-.server-card-summary { position:relative; display:grid; grid-template-columns:76px minmax(0,1fr) 18px; align-items:center; gap:22px; min-height:104px; cursor:pointer; }
+.server-card-summary { position:relative; display:grid; grid-template-columns:76px minmax(0,1fr) minmax(150px,auto) 18px; align-items:center; gap:22px; min-height:104px; cursor:pointer; }
 .server-card-summary::after { content:""; position:absolute; right:27px; top:50%; width:7px; height:7px; border-right:1.8px solid var(--white); border-bottom:1.8px solid var(--white); transform:translateY(-65%) rotate(45deg); transition:transform .18s ease; }
 .minecraft-card[open] .server-card-summary::after { transform:translateY(-35%) rotate(225deg); }
-.minecraft-live-summary { position:absolute; right:46px; top:50%; margin:0 !important; transform:translateY(-50%); text-align:right; white-space:nowrap; }
+.minecraft-live-summary { grid-column:3; grid-row:1; margin:0 !important; min-width:0; padding-right:8px; color:var(--secondary-text); font-size:14px; line-height:1.4; text-align:right; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .minecraft-player-panel { margin:0 0 4px 98px; padding:14px 16px; border-top:1px solid var(--border); color:var(--secondary-text); }
 .minecraft-player-count { margin-bottom:8px; color:var(--primary-text); font-size:14px; font-weight:600; }
 .minecraft-player-list { display:flex; flex-wrap:wrap; gap:7px; margin:0; padding:0; list-style:none; }
@@ -134,7 +134,7 @@ h1,h2,p { margin-top:0; }
   .server-card { grid-template-columns:64px minmax(0,1fr) 14px; gap:15px; padding-right:16px; }
   .server-card-summary { grid-template-columns:64px minmax(0,1fr) 14px; grid-template-rows:auto auto; gap:4px 15px; min-height:90px; padding:13px 0; }
   .server-card-summary::after { right:22px; top:32px; }
-  .minecraft-live-summary { position:static; grid-column:2 / 3; grid-row:2; justify-self:end; max-width:100%; margin:0 !important; transform:none; padding-right:20px; overflow:hidden; text-overflow:ellipsis; text-align:right; white-space:nowrap; font-size:12px; line-height:1.35; }
+  .minecraft-live-summary { grid-column:2 / 3; grid-row:2; justify-self:end; max-width:100%; margin:0 !important; padding-right:20px; overflow:hidden; text-overflow:ellipsis; text-align:right; white-space:nowrap; font-size:12px; line-height:1.35; }
   .minecraft-player-panel { margin-left:79px; }
   .server-image { width:64px; height:64px; }
   .server-info h2 { font-size:16px; }
