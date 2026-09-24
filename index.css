@@ -44,8 +44,9 @@ a:hover { color:var(--accent); }
 .server-card summary { list-style:none; }
 .server-card summary::-webkit-details-marker { display:none; }
 .server-card-summary { position:relative; display:grid; grid-template-columns:76px minmax(0,1fr) 18px; align-items:center; gap:22px; min-height:104px; cursor:pointer; }
-.server-card-summary::after { content:""; position:absolute; right:2px; top:50%; width:7px; height:7px; border-right:1.5px solid var(--secondary-text); border-bottom:1.5px solid var(--secondary-text); transform:translateY(-65%) rotate(45deg); transition:transform .18s ease; }
+.server-card-summary::after { content:""; position:absolute; right:27px; top:50%; width:7px; height:7px; border-right:1.8px solid var(--white); border-bottom:1.8px solid var(--white); transform:translateY(-65%) rotate(45deg); transition:transform .18s ease; }
 .minecraft-card[open] .server-card-summary::after { transform:translateY(-35%) rotate(225deg); }
+.minecraft-live-summary { position:absolute; right:46px; top:50%; margin:0 !important; transform:translateY(-50%); text-align:right; white-space:nowrap; }
 .minecraft-player-panel { margin:0 0 4px 98px; padding:14px 16px; border-top:1px solid var(--border); color:var(--secondary-text); }
 .minecraft-player-count { margin-bottom:8px; color:var(--primary-text); font-size:14px; font-weight:600; }
 .minecraft-player-list { display:flex; flex-wrap:wrap; gap:7px; margin:0; padding:0; list-style:none; }
@@ -132,6 +133,8 @@ h1,h2,p { margin-top:0; }
   .catalog-section { padding:20px 0 90px; scroll-margin-top:142px; }
   .server-card { grid-template-columns:64px minmax(0,1fr) 14px; gap:15px; padding-right:16px; }
   .server-card-summary { grid-template-columns:64px minmax(0,1fr) 14px; gap:15px; min-height:90px; }
+  .server-card-summary::after { right:22px; }
+  .minecraft-live-summary { right:40px; }
   .minecraft-player-panel { margin-left:79px; }
   .server-image { width:64px; height:64px; }
   .server-info h2 { font-size:16px; }
