@@ -66,7 +66,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const playerPanel = minecraftCard.querySelector(".minecraft-player-panel");
     const playerCount = minecraftCard.querySelector(".minecraft-player-count");
     const playerList = minecraftCard.querySelector(".minecraft-player-list");
-    const statusApi = "https://minecraft-status.gandrij549.workers.dev/?server=minecraft";
+    // Prefer the direct status API so the player count is not dependent on the
+    // Cloudflare Worker response format.
+    const statusApis = [
+      "https://api.mcstatus.io/v2/status/java/ger-01-p.leavehosting.com:20025",
+      "https://minecraft-status.gandrij549.workers.dev/?server=minecraft"
+    ];
 
     const setStatus = (className, title, label) => {
       statusDot.className = `server-status ${className}`;
@@ -79,13 +84,27 @@ document.addEventListener("DOMContentLoaded", () => {
         setStatus("status-checking", "Перевірка статусу", "Перевірка статусу");
         liveSummary.textContent = "Перевірка статусу…";
 
-        const response = await fetch(statusApi, { cache: "no-store" });
-        if (!response.ok) throw new Error(`Status API returned ${response.status}`);
+        let data = null;
+        let lastError = null;
 
-        const data = await response.json();
+        for (const api of statusApis) {
+          try {
+            const response = await fetch(api, { cache: "no-store" });
+            if (!response.ok) throw new Error(`Status API returned ${response.status}`);
+            data = await response.json();
+            if (data && typeof data.online === "boolean") break;
+          } catch (error) {
+            lastError = error;
+          }
+        }
+
+        if (!data || typeof data.online !== "boolean") {
+          throw lastError || new Error("No status API returned valid data");
+        }
+
         const online = data.online === true;
-        const onlinePlayers = Number(data.players?.online ?? 0);
-        const maxPlayers = Number(data.players?.max ?? 0);
+        const onlinePlayers = Number(data.players?.online);
+        const maxPlayers = Number(data.players?.max);
         const players = Array.isArray(data.players?.list) ? data.players.list : [];
 
         if (!online) {
@@ -97,7 +116,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         setStatus("status-online", "Онлайн", "Онлайн");
-        liveSummary.textContent = `${onlinePlayers} / ${maxPlayers || "?"} гравців онлайн`;
+        const shownOnline = Number.isFinite(onlinePlayers) ? onlinePlayers : 0;
+        const shownMax = Number.isFinite(maxPlayers) && maxPlayers > 0 ? maxPlayers : "?";
+        liveSummary.textContent = shownOnline + " / " + shownMax + " гравців онлайн";
         playerCount.textContent = players.length
           ? "Гравці онлайн:"
           : onlinePlayers > 0
@@ -129,7 +150,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     loadMinecraftStatus();
-    setInterval(loadMinecraftStatus, 300000);
+    // Refresh every minute; the provider may cache responses, but this makes
+    // the page update as soon as a fresh result is available.
+    setInterval(loadMinecraftStatus, 60000);
   }
 
   if (logo) {
