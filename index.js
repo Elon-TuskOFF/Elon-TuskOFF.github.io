@@ -127,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         playerList.replaceChildren();
         players.forEach((player) => {
-          const name = typeof player === "string" ? player : player?.name;
+          const name = typeof player === "string" ? player : (player?.name_clean || player?.name);
           if (!name) return;
           const item = document.createElement("li");
           item.textContent = name;
