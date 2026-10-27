@@ -5,10 +5,13 @@
   "type": "module",
   "description": "Static server catalog for the Lviv Polytechnic community",
   "scripts": {
-    "build": "npm run build:images && npm run build:css",
+    "build": "npm run build:images && npm run build:css && npm run build:static",
     "build:css": "tailwindcss -i ./styles/tailwind.css -o ./index.css --minify",
     "build:images": "node scripts/build-images.js",
-    "watch:css": "tailwindcss -i ./styles/tailwind.css -o ./index.css --watch"
+    "watch:css": "tailwindcss -i ./styles/tailwind.css -o ./index.css --watch",
+    "build:static": "node scripts/build-static.js",
+    "deploy": "wrangler deploy",
+    "deploy:check": "wrangler deploy --dry-run"
   },
   "engines": {
     "node": ">=22"
@@ -16,6 +19,7 @@
   "devDependencies": {
     "@tailwindcss/cli": "4.3.3",
     "sharp": "0.35.5",
-    "tailwindcss": "4.3.3"
+    "tailwindcss": "4.3.3",
+    "wrangler": "4.154.0"
   }
 }
