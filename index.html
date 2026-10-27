@@ -1,57 +1,151 @@
-<!DOCTYPE html>
-<html lang="uk">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Каталог серверів Львівської Політехніки">
-  <title>Lviv Polytechnic</title>
-  <link rel="preload" as="image" href="images/Minecraft_Polytechnic.png">
-  <link rel="stylesheet" href="./index.css">
-  <script src="./index.js"></script>
-  <link rel="icon" type="img" href="images/Minecraft_Polytechnic.png">
-</head>
-<body>
-  <div class="mouse-glow" aria-hidden="true"></div>
-  <header class="site-header">
-    <nav class="navigation" aria-label="Головна навігація">
-      <a class="site-logo" href="#top"><span class="site-logo-image"><img class="logo-static" src="images/Minecraft_Polytechnic.png" alt="Логотип" width="38" height="38"></span><span class="logo-title">СЕРВЕР ЛЬВІВСЬКОЇ ПОЛІТЕХНІКИ</span></a>
-      <div class="navigation-links">
-        <details class="catalog-dropdown">
-          <summary class="catalog-link cursor-pointer select-none">Каталог</summary>
-          <div class="catalog-menu" aria-label="Каталог серверів">
-            <a href="#catalog">Усі сервери</a>
-            <a href="#catalog">Minecraft</a>
-            <a href="#catalog">GregTech: New Horizons</a>
-            <a href="#catalog">Hytale</a>
-            <a href="#catalog">Project Zomboid</a>
-          </div>
-        </details>
-        <a href="#contact">Контакт</a>
-      </div>
-    </nav>
-  </header>
+<!doctype html>
+<html lang="uk" class="scroll-pt-36 bg-page font-sans motion-safe:scroll-smooth md:scroll-pt-24">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Каталог ігрових серверів спільноти Львівської Політехніки. Minecraft, GregTech: New Horizons, Hytale та Project Zomboid.">
+    <meta name="theme-color" content="#121212">
+    <title>Lviv Polytechnic — каталог серверів</title>
+    <link rel="preload" as="image" href="./images/wallpapers/aboutthat.webp" fetchpriority="high">
+    <link rel="stylesheet" href="./index.css">
+    <link rel="icon" type="image/png" href="./images/Minecraft_Polytechnic.png">
+    <script type="module" src="./index.js"></script>
+  </head>
+  <body class="m-0 min-h-screen bg-page leading-relaxed text-copy antialiased">
+    <a href="#catalog" class="sr-only fixed top-4 left-4 z-50 bg-surface p-4 focus:not-sr-only">Перейти до каталогу</a>
 
-  <main id="top">
-    <section class="hero-section" aria-label="Вітальний блок">
-      <div class="hero-image" aria-hidden="true"></div>
-      <div class="hero-content container">
-        <div class="hero-copy"><h1>Максимум свободи</h1><h3>Вхід безкоштовний та для всіх. Обирай, що подобається</h3></div>
-        <div class="hero-actions">
-          <a class="hero-button discord-button" href="https://discord.gg/HQsZmDKaJ9" style="display:flex; align-items:center; justify-content:center; gap:10px; border:0; border-radius:10px; background:#5865F2; box-shadow:0 6px 18px #5865F247;"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M19.54 5.33A16.4 16.4 0 0 0 15.5 4l-.49 1a15.4 15.4 0 0 0-6.02 0L8.5 4a16.4 16.4 0 0 0-4.04 1.33C1.9 9.3 1.2 13.18 1.55 17a16.6 16.6 0 0 0 4.96 2.5l1.2-1.65c-.66-.24-1.28-.54-1.86-.9l.46-.35c3.58 1.68 7.68 1.68 11.22 0l.46.35c-.58.36-1.2.66-1.86.9l1.2 1.65a16.6 16.6 0 0 0 4.96-2.5c.42-4.42-.72-8.26-2.75-11.67ZM8.48 15.3c-1.1 0-2-.99-2-2.2s.88-2.2 2-2.2 2.02.99 2 2.2c0 1.21-.88 2.2-2 2.2Zm7.04 0c-1.1 0-2-.99-2.2-2.2s.88-2.2 2.2-2.2 2.02.99 2.2 2.2c0 1.21-.88 2.2-2.2 2.2Z"/></svg><span>Discord</span></a>
-          <details class="map-dropdown"><summary class="hero-button"><img class="bluemap-icon" src="https://avatars.githubusercontent.com/u/42522657?s=200&v=4" alt=""><span>BlueMap</span></summary><div class="map-menu"><a href="http://ger-01-p.leavehosting.com:20130" target="_blank" rel="noopener noreferrer">Minecraft</a><a href="#" target="_blank" rel="noopener noreferrer">GregTech: New Horizons</a><a href="#" target="_blank" rel="noopener noreferrer">Hytale</a><a href="#" target="_blank" rel="noopener noreferrer">Project Zomboid</a></div></details>
+    <header class="fixed inset-x-0 top-0 z-30 py-2 md:py-4">
+      <nav aria-label="Головна навігація" class="mx-auto flex w-[calc(100%-24px)] max-w-[1100px] flex-col gap-2 md:w-[calc(100%-40px)] md:flex-row md:items-center md:justify-between md:gap-6">
+        <a href="#top" class="flex min-h-12 min-w-0 items-center gap-3 rounded-2xl border border-border bg-surface/95 px-3 py-2 shadow-lg transition-colors hover:border-neutral-500 md:min-h-14 md:px-4">
+          <img id="site-logo" src="./images/Minecraft_Polytechnic.png" alt="" width="38" height="38" class="size-7 shrink-0 rounded-lg border border-border object-cover md:size-[38px]">
+          <span class="truncate text-[10px] font-bold tracking-[0.12em] min-[400px]:text-xs md:text-sm">СЕРВЕР ЛЬВІВСЬКОЇ ПОЛІТЕХНІКИ</span>
+        </a>
+
+        <div class="flex min-h-12 items-center justify-center gap-1 rounded-2xl border border-border bg-surface/95 p-1 shadow-lg md:min-h-14">
+          <details data-dropdown class="group relative">
+            <summary class="flex cursor-pointer list-none items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-neutral-800 md:px-4 md:py-3 md:text-base">
+              Каталог
+              <svg class="size-3 transition-transform group-open:rotate-180 motion-reduce:transition-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m3 6 5 5 5-5"/></svg>
+            </summary>
+            <div class="absolute top-full left-0 z-40 mt-2 w-60 rounded-xl border border-border bg-surface p-2 shadow-xl md:right-0 md:left-auto md:translate-x-0">
+              <a href="#catalog" class="block rounded-lg px-3 py-3 text-sm text-white hover:bg-neutral-800">Усі сервери</a>
+              <a href="#minecraft" class="block rounded-lg px-3 py-3 text-sm text-white hover:bg-neutral-800">Minecraft</a>
+              <a href="#gtnh" class="block rounded-lg px-3 py-3 text-sm text-white hover:bg-neutral-800">GregTech: New Horizons</a>
+              <a href="#hytale" class="block rounded-lg px-3 py-3 text-sm text-white hover:bg-neutral-800">Hytale</a>
+              <a href="#project-zomboid" class="block rounded-lg px-3 py-3 text-sm text-white hover:bg-neutral-800">Project Zomboid</a>
+            </div>
+          </details>
+          <a href="#contact" class="rounded-lg px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-neutral-800 md:px-4 md:py-3 md:text-base">Контакт</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section aria-labelledby="hero-heading" class="relative isolate min-h-[540px] md:min-h-[637px]">
+        <!-- A real image provides a visible wallpaper even with JavaScript disabled. -->
+        <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+          <img id="hero-wallpaper" src="./images/wallpapers/aboutthat.webp" alt="" width="1920" height="1080" fetchpriority="high" class="size-full object-cover opacity-90 transition-opacity duration-500 data-[changing=true]:opacity-15 motion-reduce:transition-none">
+          <div class="absolute inset-0 bg-linear-to-r from-page/5 via-page/10 to-page/75"></div>
+          <div class="absolute inset-0 bg-linear-to-b from-transparent from-55% via-page/60 via-80% to-page"></div>
+        </div>
+
+        <div class="mx-auto flex min-h-[540px] w-[calc(100%-24px)] max-w-[1100px] flex-col items-center pt-40 md:min-h-[637px] md:w-[calc(100%-40px)] md:items-end md:pt-32">
+          <div class="max-w-[620px] px-3 text-center md:w-[48%] md:max-w-[500px] md:px-0 md:text-right">
+            <h1 id="hero-heading" class="mb-5 text-[clamp(42px,10vw,64px)] leading-none font-bold tracking-[-0.045em] text-white md:text-[clamp(46px,6vw,78px)]">Максимум свободи</h1>
+            <p class="text-base leading-relaxed font-medium md:text-[clamp(17px,2vw,23px)]">Вхід безкоштовний та для всіх. Обирай, що подобається</p>
+          </div>
+
+          <div class="mt-20 mb-8 flex w-full flex-wrap items-start justify-center gap-3 md:mt-36 md:gap-4">
+            <a href="https://discord.gg/HQsZmDKaJ9" class="flex min-w-[130px] items-center justify-center gap-2 rounded-xl bg-discord px-5 py-3 text-sm font-bold text-white shadow-lg shadow-discord/25 transition hover:bg-indigo-500 motion-safe:hover:-translate-y-0.5 md:min-w-[170px] md:px-6 md:text-base">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.54 5.33A16.4 16.4 0 0 0 15.5 4l-.49 1a15.4 15.4 0 0 0-6.02 0L8.5 4a16.4 16.4 0 0 0-4.04 1.33C1.9 9.3 1.2 13.18 1.55 17a16.6 16.6 0 0 0 4.96 2.5l1.2-1.65c-.66-.24-1.28-.54-1.86-.9l.46-.35c3.58 1.68 7.68 1.68 11.22 0l.46.35c-.58.36-1.2.66-1.86.9l1.2 1.65a16.6 16.6 0 0 0 4.96-2.5c.42-4.42-.72-8.26-2.75-11.67ZM8.48 15.3c-1.1 0-2-.99-2-2.2s.88-2.2 2-2.2 2.02.99 2 2.2c0 1.21-.88 2.2-2 2.2Zm7.04 0c-1.1 0-2-.99-2-2.2s.88-2.2 2-2.2 2.02.99 2 2.2c0 1.21-.88 2.2-2 2.2Z"/></svg>
+              Discord
+            </a>
+            <details data-dropdown class="group relative z-20">
+              <summary class="flex min-w-[130px] cursor-pointer list-none items-center justify-center gap-2 rounded-xl bg-map px-5 py-3 text-sm font-bold text-white shadow-lg shadow-map/25 transition hover:bg-blue-500 motion-safe:hover:-translate-y-0.5 md:min-w-[170px] md:px-6 md:text-base">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m9 18-6 3V6l6-3 6 3 6-3v15l-6 3-6-3Zm0 0V3m6 18V6"/></svg>
+                BlueMap
+                <svg class="size-3 transition-transform group-open:rotate-180 motion-reduce:transition-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m3 6 5 5 5-5"/></svg>
+              </summary>
+              <div class="absolute top-full right-0 mt-2 w-56 rounded-xl border border-border bg-surface p-2 shadow-xl md:right-auto md:left-1/2 md:-translate-x-1/2">
+                <a href="http://ger-01-p.leavehosting.com:20130" target="_blank" rel="noopener noreferrer" class="block rounded-lg px-3 py-3 text-sm text-white hover:bg-neutral-800">Minecraft <span class="sr-only">(у новій вкладці)</span></a>
+                <p class="px-3 py-2 text-xs text-muted">Мапи інших серверів — незабаром.</p>
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section id="catalog" aria-labelledby="catalog-heading" class="mx-auto w-[calc(100%-24px)] max-w-[1100px] pt-6 pb-24 md:w-[calc(100%-40px)] md:pb-30">
+        <p class="mb-4 text-xs font-bold tracking-[0.16em] text-muted">КАТАЛОГ</p>
+        <h2 id="catalog-heading" class="mb-10 text-[clamp(40px,7vw,76px)] leading-[1.05] font-bold tracking-[-0.04em]">Доступні сервери</h2>
+
+        <!-- Availability is maintained here manually; no server APIs or player tracking. -->
+        <div class="flex flex-col gap-3">
+          <article id="minecraft" aria-labelledby="minecraft-heading" class="grid grid-cols-[56px_minmax(0,1fr)_14px] items-center gap-4 rounded-2xl border border-border bg-neutral-900/60 p-3 transition-colors hover:border-neutral-500 hover:bg-surface md:grid-cols-[76px_minmax(0,1fr)_14px] md:gap-6 md:pr-6">
+            <img src="./images/Minecraft_Polytechnic.png" alt="" width="76" height="76" loading="lazy" decoding="async" class="size-14 rounded-xl border border-border object-cover md:size-[76px]">
+            <div>
+              <h3 id="minecraft-heading" class="mb-1 text-base leading-snug font-bold md:text-lg">Create Modpack</h3>
+              <p class="text-sm text-muted">Сервер відкритий!</p>
+            </div>
+            <span class="size-3 rounded-full bg-neutral-400 ring-3 ring-white/5" title="Статус уточнюйте у Discord"><span class="sr-only">Поточний статус уточнюйте у Discord</span></span>
+          </article>
+
+          <article id="gtnh" aria-labelledby="gtnh-heading" class="grid grid-cols-[56px_minmax(0,1fr)_14px] items-center gap-4 rounded-2xl border border-border bg-neutral-900/60 p-3 transition-colors hover:border-neutral-500 hover:bg-surface md:grid-cols-[76px_minmax(0,1fr)_14px] md:gap-6 md:pr-6">
+            <img src="./images/gregtechlogo.png" alt="" width="76" height="76" loading="lazy" decoding="async" class="size-14 rounded-xl border border-border object-cover md:size-[76px]">
+            <div>
+              <h3 id="gtnh-heading" class="mb-1 text-base leading-snug font-bold md:text-lg">GregTech: New Horizons</h3>
+              <p class="text-sm text-muted">Відкриття на 2.9.x версію.</p>
+            </div>
+            <span class="size-3 rounded-full bg-red-500 ring-3 ring-white/5" title="Зупинений"><span class="sr-only">Зупинений</span></span>
+          </article>
+
+          <article id="hytale" aria-labelledby="hytale-heading" class="grid grid-cols-[56px_minmax(0,1fr)_14px] items-center gap-4 rounded-2xl border border-border bg-neutral-900/60 p-3 transition-colors hover:border-neutral-500 hover:bg-surface md:grid-cols-[76px_minmax(0,1fr)_14px] md:gap-6 md:pr-6">
+            <span aria-hidden="true" class="flex size-14 items-center justify-center rounded-xl border border-border bg-neutral-800 text-2xl font-bold text-muted md:size-[76px]">H</span>
+            <div>
+              <h3 id="hytale-heading" class="mb-1 text-base leading-snug font-bold md:text-lg">Hytale</h3>
+              <p class="text-sm text-muted">Відкриття на 2 Chapter.</p>
+            </div>
+            <span class="size-3 rounded-full bg-red-500 ring-3 ring-white/5" title="Зупинений"><span class="sr-only">Зупинений</span></span>
+          </article>
+
+          <article id="project-zomboid" aria-labelledby="zomboid-heading" class="grid grid-cols-[56px_minmax(0,1fr)_14px] items-center gap-4 rounded-2xl border border-border bg-neutral-900/60 p-3 transition-colors hover:border-neutral-500 hover:bg-surface md:grid-cols-[76px_minmax(0,1fr)_14px] md:gap-6 md:pr-6">
+            <span aria-hidden="true" class="flex size-14 items-center justify-center rounded-xl border border-border bg-neutral-800 text-xl font-bold text-muted md:size-[76px]">PZ</span>
+            <div>
+              <h3 id="zomboid-heading" class="mb-1 text-base leading-snug font-bold md:text-lg">Project Zomboid</h3>
+              <p class="text-sm text-muted">У пошуках сервера.</p>
+            </div>
+            <span class="size-3 rounded-full bg-red-500 ring-3 ring-white/5" title="Зупинений"><span class="sr-only">Зупинений</span></span>
+          </article>
+
+          <article aria-labelledby="idea-heading" class="grid grid-cols-[56px_minmax(0,1fr)] items-center gap-4 rounded-2xl border border-dashed border-border bg-neutral-900/60 p-3 md:grid-cols-[76px_minmax(0,1fr)] md:gap-6 md:pr-6">
+            <span aria-hidden="true" class="flex size-14 items-center justify-center rounded-xl border border-border bg-neutral-800 text-3xl text-muted md:size-[76px]">+</span>
+            <div>
+              <h3 id="idea-heading" class="mb-1 text-base leading-snug font-bold md:text-lg">Ваша ідея</h3>
+              <p class="text-sm text-muted">Щодо власних серверів пишіть власнику у <a href="https://discord.gg/HQsZmDKaJ9" class="text-copy underline underline-offset-4 hover:text-white">Discord</a>.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer id="contact" class="border-t border-border pt-16 pb-8 md:pt-20">
+      <div class="mx-auto w-[calc(100%-24px)] max-w-[1100px] md:w-[calc(100%-40px)]">
+        <div class="flex flex-col gap-10 pb-14 md:flex-row md:items-end md:justify-between md:pb-16">
+          <div>
+            <p class="mb-4 text-xs font-bold tracking-[0.16em] text-muted">КОНТАКТ</p>
+            <h2 class="text-2xl font-bold">У розробці</h2>
+          </div>
+          <div class="flex flex-wrap gap-6 font-semibold text-white">
+            <a href="mailto:gandrij549@gmail.com" class="border-b border-border pb-1 hover:border-neutral-400">Email</a>
+            <a href="https://github.com/Elon-TuskOFF" target="_blank" rel="noopener noreferrer" class="border-b border-border pb-1 hover:border-neutral-400">GitHub</a>
+            <a href="https://t.me/i731ieh_uhe32" target="_blank" rel="noopener noreferrer" class="border-b border-border pb-1 hover:border-neutral-400">Telegram</a>
+          </div>
+        </div>
+        <div class="flex flex-col gap-3 border-t border-border pt-6 text-xs text-muted md:flex-row md:justify-between">
+          <p>Сайт зроблено студентом Львівської Політехніки</p>
+          <p>HTML, Tailwind CSS &amp; JavaScript</p>
         </div>
       </div>
-    </section>
-
-    <section id="catalog" class="catalog-section"><div class="container"><p class="section-label">КАТАЛОГ</p><h1>Доступні сервери</h1><div class="server-list" aria-live="polite">
-      <details class="server-card minecraft-card" data-server="minecraft"><summary class="server-card-summary"><div class="server-image"><img src="images/Minecraft_Polytechnic.png" alt="Minecraft"></div><div class="server-info"><h2>Create Modpack</h2><p>Сервер відкритий!</p></div><p class="minecraft-live-summary">Перевірка статусу…</p><div class="server-status status-checking" title="Перевірка статусу" aria-label="Перевірка статусу"></div></summary><div class="minecraft-player-panel" hidden><div class="minecraft-player-count"></div><ul class="minecraft-player-list"></ul></div></details>
-      <article class="server-card" data-server="gtnh"><div class="server-image"><img src="images/gregtechlogo.png" alt="GTNH"></div><div class="server-info"><h2>GregTech: New Horizons</h2><p>Відкриття на 2.9.x версію.</p></div><div class="server-status status-stopped" title="Зупинений" aria-label="Зупинений"></div></article>
-      <article class="server-card" data-server="hytale"><div class="server-image"><img src="images/hytale.png" alt="Hytale"></div><div class="server-info"><h2>Hytale</h2><p>Відкриття на 2 Chapter.</p></div><div class="server-status status-stopped" title="Зупинений" aria-label="Зупинений"></div></article>
-      <article class="server-card" data-server="project-zomboid"><div class="server-image"><img src="images/project-zomboid.png" alt="Project Zomboid"></div><div class="server-info"><h2>Project Zomboid</h2><p>У пошуках сервера.</p></div><div class="server-status status-stopped" title="Зупинений" aria-label="Зупинений"></div></article>
-      <article class="server-card" data-server="ownserver"><div class="server-image"><img src="" alt="Власний сервер"></div><div class="server-info"><h2>Ваша ідея</h2><p>Щодо власних серверів пишіть власнику у Discord.</p></div><div class="server-status status-stopped" title="Зупинений" aria-label="Зупинений"></div></article>
-    </div></div></section>
-  </main>
-
-  <footer id="contact" class="site-footer"><div class="container footer-content"><div><p class="section-label">CONTACT</p><h2>У розробці</h2></div><div class="contact-links"><a href="mailto:gandrij549@gmail.com" target="_blank">Email</a><a href="https://github.com/Elon-TuskOFF" target="_blank">GitHub</a><a href="https://t.me/i731ieh_uhe32" target="_blank">Telegram</a></div></div><div class="container footer-bottom"><span>Сайт зроблено студентом Львівської Політехніки</span><span>За допомогою HTML, CSS &amp; JS</span></div></footer>
-</body>
+    </footer>
+  </body>
 </html>

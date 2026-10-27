@@ -1,0 +1,21 @@
+{
+  "name": "lviv-polytechnic-server-catalog",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Static server catalog for the Lviv Polytechnic community",
+  "scripts": {
+    "build": "npm run build:images && npm run build:css",
+    "build:css": "tailwindcss -i ./styles/tailwind.css -o ./index.css --minify",
+    "build:images": "node scripts/build-images.js",
+    "watch:css": "tailwindcss -i ./styles/tailwind.css -o ./index.css --watch"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "4.3.3",
+    "sharp": "0.35.5",
+    "tailwindcss": "4.3.3"
+  }
+}
