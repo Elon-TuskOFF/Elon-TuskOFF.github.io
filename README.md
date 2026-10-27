@@ -31,8 +31,19 @@ The first wallpaper displays without JavaScript. With JavaScript enabled, wallpa
 
 Server descriptions and availability are maintained manually in `index.html`. The Minecraft card is a static article; there are no status API URLs, API requests, polling timers, player counts, or player-list panels. Visitors can check current availability in Discord. BlueMap remains a normal external link.
 
-## Publishing
+## GitHub Pages
 
 Commit `index.html`, `index.js`, `index.css`, `wallpapers.js`, and the referenced image assets. The generated CSS and images are included in the repository, so the existing GitHub Pages static publishing setup does not need to change. To change the generated assets, run `npm ci && npm run build` and commit the results.
 
 This project was made by a human and AI. Feel free to use or modify any part of this code.
+
+## Cloudflare Workers
+
+`wrangler.jsonc` explicitly configures this project as a static-assets-only Worker named `elon-tuskoff-github-io`. The browser's `index.js` is an asset, not a Worker entry point. Wrangler runs `npm run build` automatically, which also assembles the public site in `dist/`. Only browser files are copied; source artwork, build scripts, dependencies, and repository metadata are excluded.
+
+```sh
+npm run deploy:check  # Build and validate the deployment without publishing
+npm run deploy       # Publish using your Cloudflare account
+```
+
+For the connected Cloudflare Workers Builds project, use `npx wrangler deploy` as the deploy command. The dashboard build command can be left empty because Wrangler's custom build command handles it. If the dashboard already runs `npm run build`, it is safe but duplicates the build. Keep the existing production branch selection; merging the PR is separate from pushing its review branch. The generated `dist/` and local Wrangler state are ignored by Git.
