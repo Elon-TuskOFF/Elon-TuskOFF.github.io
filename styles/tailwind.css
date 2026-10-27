@@ -1,0 +1,25 @@
+@import "tailwindcss" source(none);
+@source "../index.html";
+@source "../index.js";
+
+@theme {
+  --font-sans: Arial, Helvetica, sans-serif;
+  --color-page: #121212;
+  --color-surface: #181818;
+  --color-border: #444444;
+  --color-copy: #e0e0e0;
+  --color-muted: #b0b0b0;
+  --color-discord: #5865f2;
+  --color-map: #2477d4;
+}
+
+@layer base {
+  :where(a, summary):focus-visible {
+    @apply rounded-lg outline-2 outline-offset-4 outline-white;
+  }
+
+  /* Safari still draws its native marker with list-style: none. */
+  summary::-webkit-details-marker {
+    display: none;
+  }
+}
