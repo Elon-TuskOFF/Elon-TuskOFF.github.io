@@ -8,6 +8,7 @@ const assets = [
   "index.html",
   "index.css",
   "index.js",
+  "comments.js",
   "wallpapers.js",
   "images/Minecraft_Polytechnic.png",
   "images/gregtechlogo.png",
