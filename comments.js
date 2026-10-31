@@ -1,7 +1,8 @@
-// GitHub Pages serves static files; its comments use the existing Cloudflare API.
-const API_URL = location.hostname === "elon-tuskoff.github.io"
+// An optional API URL supports separate Node hosting; a full Node deployment uses the same origin.
+const configuredAPI = document.querySelector('meta[name="comments-api"]')?.content.trim();
+const API_URL = configuredAPI || (location.hostname === "elon-tuskoff.github.io"
   ? "https://elon-tuskoff-github-io.gandrij549.workers.dev/api/comments"
-  : "/api/comments";
+  : "/api/comments");
 
 class CommentsError extends Error {}
 

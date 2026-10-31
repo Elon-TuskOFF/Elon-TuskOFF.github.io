@@ -15,7 +15,7 @@ function publicComment(row) {
   return { id: row.id, author: row.author, text: row.body, createdAt: new Date(row.created_at).toISOString() };
 }
 
-/** One shared object serializes posting across all server discussions. */
+/** Shared storage uses one atomic allowance across all server discussions. */
 export class CommentRepository {
   constructor(storage) {
     this.storage = storage;
