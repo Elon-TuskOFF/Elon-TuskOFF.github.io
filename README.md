@@ -4,7 +4,7 @@ A Ukrainian-language community server directory hosted on GitHub Pages. The site
 
 ## Local development
 
-Use Node.js 22 or newer:
+Use Node.js 22.13 or newer:
 
 ```sh
 npm ci
@@ -29,27 +29,33 @@ The first wallpaper displays without JavaScript. With JavaScript enabled, wallpa
 
 ## Server information
 
-Server descriptions and availability are maintained manually in `index.html`. The catalog contains GTNH, Hytale, and Project Zomboid. The Create Modpack card has been removed. There are no status API URLs, API requests, polling timers, player counts, or player-list panels. Visitors can check current availability in Discord. BlueMap remains a normal external link.
+Server descriptions and availability are maintained manually in `index.html`. The catalog contains GTNH, Hytale, and Project Zomboid. The Create Modpack card has been removed. There are no status API URLs, API requests, polling timers, player counts, or player-list panels. Visitors can check current availability in Discord. BlueMap is a blue, disabled button without a destination until a link is supplied.
 
-## Comments
+## Public comments
 
-Each server card has a native expandable comments panel. `comments.js` handles form submission, validates a name (1–60 characters) and message (1–1000 characters), builds comment elements with `createElement`/`textContent`, and updates the count without reloading. Comments are kept separately for each server in browser `localStorage`. They are local to that browser, are never sent to a server, and are not shared with other visitors. The panel explains this limitation.
+Each server has a public, expandable discussion. `comments.js` loads comments from `/api/comments`, posts form data, displays inline errors and a server-derived posting cooldown, and provides pagination and refresh controls. All names and messages are rendered through `textContent`. Browser-local comments from the previous version are not uploaded or published.
 
-If storage is blocked or full, comments still work for the current page and an inline message explains that they could not be saved. Malformed stored entries are ignored. The form stays disabled without JavaScript; native expansion, catalog navigation, and the rest of the site remain usable.
+`worker/index.js` handles the API and `worker/store.js` stores comments in a SQLite-backed Cloudflare Durable Object. The Wrangler configuration provisions the `COMMENTS` binding using the `public-comments-v1` migration. No separate database ID, API key, or manual SQL setup is required. Keep the existing migration and class name on future deployments to preserve comments.
+
+A single shared object enforces **one successful comment per IP address across the whole site every rolling 24 hours**. The limit check, comment insertion, and allowance update share one transaction, so parallel requests and switching server discussions cannot bypass it. Invalid submissions do not consume the allowance. A rejected post returns HTTP 429, `Retry-After`, and `nextAllowedAt`.
+
+Only Cloudflare's `CF-Connecting-IP` header is used to identify the caller. Raw IP addresses are never saved or returned. Rate-limit keys use HMAC-SHA-256 with a randomly generated, private, persistent salt. Expired keys are pruned during successful posts. Public responses contain only comment IDs, names, messages, and timestamps, plus counts, pagination, and the caller's next allowed posting time.
+
+For local development and the real API, use `npm run dev` instead of a static Python server. `npm test` checks storage and rate-limit behavior; `npm run deploy:check` validates the Worker and static build without publishing. Browser-only static hosting cannot run the API.
 
 ## GitHub Pages
 
-Commit `index.html`, `index.js`, `comments.js`, `index.css`, `wallpapers.js`, and the referenced image assets. The generated CSS and images are included in the repository, so the existing GitHub Pages static publishing setup does not need to change. To change the generated assets, run `npm ci && npm run build` and commit the results.
+Commit `index.html`, `index.js`, `comments.js`, `index.css`, `wallpapers.js`, and the referenced image assets. The generated CSS and images are included in the repository, so GitHub Pages can still serve the static website. On `elon-tuskoff.github.io`, comments connect to the existing production API at `https://elon-tuskoff-github-io.gandrij549.workers.dev/api/comments`; Cloudflare permits this exact origin. Cloudflare-hosted copies use their own same-origin API. Keep the production Worker enabled for GitHub Pages comments to work. To change the generated assets, run `npm ci && npm run build` and commit the results.
 
 This project was made by a human and AI. Feel free to use or modify any part of this code.
 
 ## Cloudflare Workers
 
-`wrangler.jsonc` explicitly configures this project as a static-assets-only Worker named `elon-tuskoff-github-io`. The browser's `index.js` is an asset, not a Worker entry point. Wrangler runs `npm run build` automatically, which also assembles the public site in `dist/`. Only browser files are copied; source artwork, build scripts, dependencies, and repository metadata are excluded.
+`wrangler.jsonc` configures the `elon-tuskoff-github-io` Worker with static assets and a shared comments API. `worker/index.js` is the Worker entry point; the browser's `index.js` remains a static asset. Wrangler runs `npm test` and `npm run build` automatically, which also assembles the public site in `dist/`. Only browser files are copied; Worker source, tests, source artwork, build scripts, dependencies, and repository metadata are excluded from public assets.
 
 ```sh
 npm run deploy:check  # Build and validate the deployment without publishing
 npm run deploy       # Publish using your Cloudflare account
 ```
 
-For the connected Cloudflare Workers Builds project, use `npx wrangler deploy` as the deploy command. The dashboard build command can be left empty because Wrangler's custom build command handles it. If the dashboard already runs `npm run build`, it is safe but duplicates the build. Keep the existing production branch selection; merging the PR is separate from pushing its review branch. The generated `dist/` and local Wrangler state are ignored by Git.
+For the connected Cloudflare Workers Builds project, use `npx wrangler deploy` as the deploy command. The dashboard build command can be left empty because Wrangler's custom build command runs tests and builds the site. If the dashboard already runs `npm run build`, it is safe but duplicates the build. Keep the existing production branch selection; merging the PR is separate from pushing its review branch. The generated `dist/` and local Wrangler state are ignored by Git.

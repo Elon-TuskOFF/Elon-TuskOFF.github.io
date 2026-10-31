@@ -3,9 +3,31 @@
   "name": "elon-tuskoff-github-io",
   "compatibility_date": "2026-10-27",
   "build": {
-    "command": "npm run build"
+    "command": "npm test && npm run build"
   },
   "assets": {
-    "directory": "./dist"
-  }
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": [
+      "/api/*"
+    ]
+  },
+  "main": "worker/index.js",
+  "workers_dev": true,
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "COMMENTS",
+        "class_name": "CommentStore"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "public-comments-v1",
+      "new_sqlite_classes": [
+        "CommentStore"
+      ]
+    }
+  ]
 }
