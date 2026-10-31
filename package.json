@@ -11,10 +11,12 @@
     "watch:css": "tailwindcss -i ./styles/tailwind.css -o ./index.css --watch",
     "build:static": "node scripts/build-static.js",
     "deploy": "wrangler deploy",
-    "deploy:check": "wrangler deploy --dry-run"
+    "deploy:check": "wrangler deploy --dry-run",
+    "test": "node --test tests/*.test.js",
+    "dev": "wrangler dev"
   },
   "engines": {
-    "node": ">=22"
+    "node": ">=22.13.0"
   },
   "devDependencies": {
     "@tailwindcss/cli": "4.3.3",

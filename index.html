@@ -51,7 +51,7 @@
           <p class="mb-6 flex items-center gap-2.5 text-[11px] font-semibold tracking-[0.18em] text-sky-200">
             <span aria-hidden="true" class="size-1.5 rounded-full bg-sky-300"></span>Наразі доступний 1 сервер
           </p>
-          <h1 id="hero-heading" class="max-w-[750px] text-[clamp(46px,8vw,96px)] leading-[0.98] font-bold tracking-[-0.055em] text-white">Максимум<br>свободи<span class="text-sky-300">.</span></h1>
+          <h1 id="hero-heading" class="max-w-[750px] text-[clamp(46px,8vw,96px)] leading-[0.98] font-bold tracking-[-0.055em] text-white">Максимум<br>свободи<span>.</span></h1>
           <p class="mt-7 max-w-md text-base leading-7 text-copy/85 sm:text-lg">Вхід безкоштовний та для всіх.<br>Обирай, що подобається, і приєднуйся</p>
           <div class="mt-9 flex flex-wrap items-center gap-3">
             <a href="https://discord.gg/HQsZmDKaJ9" class="inline-flex min-h-12 items-center justify-center gap-2.5 rounded-xl bg-discord px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-discord/20 transition hover:bg-indigo-500 motion-safe:hover:-translate-y-0.5">
@@ -59,7 +59,9 @@
             </a>
             <a href="#catalog" class="inline-flex min-h-12 items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10">Обрати сервер <span aria-hidden="true">↗</span></a>
           </div>
-          <a href="http://ger-01-p.leavehosting.com:20130" target="_blank" rel="noopener noreferrer" class="mt-6 inline-flex items-center gap-2 text-xs text-muted underline-offset-4 hover:text-white hover:underline">Відкрити BlueMap <span aria-hidden="true">↗</span><span class="sr-only">(у новій вкладці)</span></a>
+          <button type="button" disabled aria-label="BlueMap — посилання незабаром" title="Посилання на BlueMap незабаром" class="mt-6 inline-flex min-h-12 items-center justify-center gap-2.5 rounded-xl bg-map px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-map/20 disabled:cursor-not-allowed">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m9 18-6 3V6l6-3 6 3 6-3v15l-6 3-6-3Zm0 0V3m6 18V6"/></svg>BlueMap
+          </button>
         </div>
       </section>
 
@@ -86,14 +88,19 @@
 
             <details data-comments="gtnh" class="group border-t border-white/10">
               <summary class="flex cursor-pointer list-none items-center justify-between gap-3 px-6 py-4 text-sm font-semibold text-copy transition-colors hover:bg-white/5 sm:px-7">
-                <span class="flex items-center gap-2.5"><svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 9h10M7 13h6M20 11.5a7.5 7.5 0 0 1-7.5 7.5H5l-3 3V11.5A7.5 7.5 0 0 1 9.5 4h3a7.5 7.5 0 0 1 7.5 7.5Z"/></svg>Коментарі <span data-comment-count class="rounded-md bg-white/5 px-2 py-0.5 text-xs text-muted">0</span></span>
+                <span class="flex items-center gap-2.5"><svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 9h10M7 13h6M20 11.5a7.5 7.5 0 0 1-7.5 7.5H5l-3 3V11.5A7.5 7.5 0 0 1 9.5 4h3a7.5 7.5 0 0 1 7.5 7.5Z"/></svg>Коментарі <span data-comment-count class="rounded-md bg-white/5 px-2 py-0.5 text-xs text-muted">—</span></span>
                 <svg class="size-4 shrink-0 transition-transform group-open:rotate-180 motion-reduce:transition-none" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m5 8 5 5 5-5"/></svg>
               </summary>
               <div class="space-y-5 border-t border-white/5 px-6 pt-5 pb-6 sm:px-7">
-                <p class="text-xs leading-5 text-muted">Коментарі зберігаються лише у вашому браузері та не надсилаються іншим відвідувачам.</p>
-                <p data-empty-comments class="rounded-xl border border-dashed border-white/10 p-4 text-sm text-muted">Коментарів поки немає. Почніть обговорення.</p>
+                <p class="text-xs leading-5 text-muted">Коментарі публічні. З однієї IP-адреси можна залишити один коментар кожні 24 години на всьому сайті.</p>
+                <p data-empty-comments class="rounded-xl border border-dashed border-white/10 p-4 text-sm text-muted">Завантаження коментарів…</p>
                 <ul data-comment-list aria-label="Коментарі до GregTech: New Horizons" class="space-y-3"></ul>
+                <div class="flex flex-wrap gap-3">
+                  <button data-refresh-comments type="button" class="cursor-pointer rounded-lg border border-white/10 px-3 py-2 text-xs text-muted hover:text-white">Оновити</button>
+                  <button data-more-comments type="button" hidden class="cursor-pointer rounded-lg border border-white/10 px-3 py-2 text-xs text-muted hover:text-white">Попередні коментарі</button>
+                </div>
 
+                <p data-posting-status class="text-xs leading-5 text-muted"></p>
                 <form data-comment-form aria-label="Додати коментар до GregTech: New Horizons">
                   <fieldset disabled class="space-y-4 disabled:opacity-50">
                     <legend class="sr-only">Новий коментар</legend>
@@ -105,7 +112,7 @@
                       <label for="gtnh-comment" class="mb-2 block text-xs font-semibold text-copy">Коментар</label>
                       <textarea id="gtnh-comment" name="comment" rows="3" required maxlength="1000" aria-describedby="gtnh-message" class="block min-h-24 w-full resize-y rounded-xl border border-white/10 bg-page/60 px-3.5 py-3 text-sm text-white transition-colors placeholder:text-muted/60 hover:border-white/20" placeholder="Поділіться думкою про сервер…"></textarea>
                     </div>
-                    <button type="submit" class="w-full cursor-pointer rounded-xl bg-sky-300 px-4 py-3 text-sm font-bold text-slate-950 transition-colors hover:bg-sky-200">Додати коментар</button>
+                    <button type="submit" class="w-full cursor-pointer rounded-xl bg-sky-300 px-4 py-3 text-sm font-bold text-slate-950 transition-colors hover:bg-sky-200 disabled:cursor-not-allowed disabled:opacity-50">Додати коментар</button>
                   </fieldset>
                   <p id="gtnh-message" data-comment-message role="status" aria-live="polite" class="mt-3 text-xs leading-5 text-muted"></p>
                 </form>
@@ -127,14 +134,19 @@
 
             <details data-comments="hytale" class="group border-t border-white/10">
               <summary class="flex cursor-pointer list-none items-center justify-between gap-3 px-6 py-4 text-sm font-semibold text-copy transition-colors hover:bg-white/5 sm:px-7">
-                <span class="flex items-center gap-2.5"><svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 9h10M7 13h6M20 11.5a7.5 7.5 0 0 1-7.5 7.5H5l-3 3V11.5A7.5 7.5 0 0 1 9.5 4h3a7.5 7.5 0 0 1 7.5 7.5Z"/></svg>Коментарі <span data-comment-count class="rounded-md bg-white/5 px-2 py-0.5 text-xs text-muted">0</span></span>
+                <span class="flex items-center gap-2.5"><svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 9h10M7 13h6M20 11.5a7.5 7.5 0 0 1-7.5 7.5H5l-3 3V11.5A7.5 7.5 0 0 1 9.5 4h3a7.5 7.5 0 0 1 7.5 7.5Z"/></svg>Коментарі <span data-comment-count class="rounded-md bg-white/5 px-2 py-0.5 text-xs text-muted">—</span></span>
                 <svg class="size-4 shrink-0 transition-transform group-open:rotate-180 motion-reduce:transition-none" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m5 8 5 5 5-5"/></svg>
               </summary>
               <div class="space-y-5 border-t border-white/5 px-6 pt-5 pb-6 sm:px-7">
-                <p class="text-xs leading-5 text-muted">Коментарі зберігаються лише у вашому браузері та не надсилаються іншим відвідувачам.</p>
-                <p data-empty-comments class="rounded-xl border border-dashed border-white/10 p-4 text-sm text-muted">Коментарів поки немає. Почніть обговорення.</p>
+                <p class="text-xs leading-5 text-muted">Коментарі публічні. З однієї IP-адреси можна залишити один коментар кожні 24 години на всьому сайті.</p>
+                <p data-empty-comments class="rounded-xl border border-dashed border-white/10 p-4 text-sm text-muted">Завантаження коментарів…</p>
                 <ul data-comment-list aria-label="Коментарі до Hytale" class="space-y-3"></ul>
+                <div class="flex flex-wrap gap-3">
+                  <button data-refresh-comments type="button" class="cursor-pointer rounded-lg border border-white/10 px-3 py-2 text-xs text-muted hover:text-white">Оновити</button>
+                  <button data-more-comments type="button" hidden class="cursor-pointer rounded-lg border border-white/10 px-3 py-2 text-xs text-muted hover:text-white">Попередні коментарі</button>
+                </div>
 
+                <p data-posting-status class="text-xs leading-5 text-muted"></p>
                 <form data-comment-form aria-label="Додати коментар до Hytale">
                   <fieldset disabled class="space-y-4 disabled:opacity-50">
                     <legend class="sr-only">Новий коментар</legend>
@@ -146,7 +158,7 @@
                       <label for="hytale-comment" class="mb-2 block text-xs font-semibold text-copy">Коментар</label>
                       <textarea id="hytale-comment" name="comment" rows="3" required maxlength="1000" aria-describedby="hytale-message" class="block min-h-24 w-full resize-y rounded-xl border border-white/10 bg-page/60 px-3.5 py-3 text-sm text-white transition-colors placeholder:text-muted/60 hover:border-white/20" placeholder="Поділіться думкою про сервер…"></textarea>
                     </div>
-                    <button type="submit" class="w-full cursor-pointer rounded-xl bg-sky-300 px-4 py-3 text-sm font-bold text-slate-950 transition-colors hover:bg-sky-200">Додати коментар</button>
+                    <button type="submit" class="w-full cursor-pointer rounded-xl bg-sky-300 px-4 py-3 text-sm font-bold text-slate-950 transition-colors hover:bg-sky-200 disabled:cursor-not-allowed disabled:opacity-50">Додати коментар</button>
                   </fieldset>
                   <p id="hytale-message" data-comment-message role="status" aria-live="polite" class="mt-3 text-xs leading-5 text-muted"></p>
                 </form>
@@ -168,14 +180,19 @@
 
             <details data-comments="project-zomboid" class="group border-t border-white/10">
               <summary class="flex cursor-pointer list-none items-center justify-between gap-3 px-6 py-4 text-sm font-semibold text-copy transition-colors hover:bg-white/5 sm:px-7">
-                <span class="flex items-center gap-2.5"><svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 9h10M7 13h6M20 11.5a7.5 7.5 0 0 1-7.5 7.5H5l-3 3V11.5A7.5 7.5 0 0 1 9.5 4h3a7.5 7.5 0 0 1 7.5 7.5Z"/></svg>Коментарі <span data-comment-count class="rounded-md bg-white/5 px-2 py-0.5 text-xs text-muted">0</span></span>
+                <span class="flex items-center gap-2.5"><svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 9h10M7 13h6M20 11.5a7.5 7.5 0 0 1-7.5 7.5H5l-3 3V11.5A7.5 7.5 0 0 1 9.5 4h3a7.5 7.5 0 0 1 7.5 7.5Z"/></svg>Коментарі <span data-comment-count class="rounded-md bg-white/5 px-2 py-0.5 text-xs text-muted">—</span></span>
                 <svg class="size-4 shrink-0 transition-transform group-open:rotate-180 motion-reduce:transition-none" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m5 8 5 5 5-5"/></svg>
               </summary>
               <div class="space-y-5 border-t border-white/5 px-6 pt-5 pb-6 sm:px-7">
-                <p class="text-xs leading-5 text-muted">Коментарі зберігаються лише у вашому браузері та не надсилаються іншим відвідувачам.</p>
-                <p data-empty-comments class="rounded-xl border border-dashed border-white/10 p-4 text-sm text-muted">Коментарів поки немає. Почніть обговорення.</p>
+                <p class="text-xs leading-5 text-muted">Коментарі публічні. З однієї IP-адреси можна залишити один коментар кожні 24 години на всьому сайті.</p>
+                <p data-empty-comments class="rounded-xl border border-dashed border-white/10 p-4 text-sm text-muted">Завантаження коментарів…</p>
                 <ul data-comment-list aria-label="Коментарі до Project Zomboid" class="space-y-3"></ul>
+                <div class="flex flex-wrap gap-3">
+                  <button data-refresh-comments type="button" class="cursor-pointer rounded-lg border border-white/10 px-3 py-2 text-xs text-muted hover:text-white">Оновити</button>
+                  <button data-more-comments type="button" hidden class="cursor-pointer rounded-lg border border-white/10 px-3 py-2 text-xs text-muted hover:text-white">Попередні коментарі</button>
+                </div>
 
+                <p data-posting-status class="text-xs leading-5 text-muted"></p>
                 <form data-comment-form aria-label="Додати коментар до Project Zomboid">
                   <fieldset disabled class="space-y-4 disabled:opacity-50">
                     <legend class="sr-only">Новий коментар</legend>
@@ -187,7 +204,7 @@
                       <label for="project-zomboid-comment" class="mb-2 block text-xs font-semibold text-copy">Коментар</label>
                       <textarea id="project-zomboid-comment" name="comment" rows="3" required maxlength="1000" aria-describedby="project-zomboid-message" class="block min-h-24 w-full resize-y rounded-xl border border-white/10 bg-page/60 px-3.5 py-3 text-sm text-white transition-colors placeholder:text-muted/60 hover:border-white/20" placeholder="Поділіться думкою про сервер…"></textarea>
                     </div>
-                    <button type="submit" class="w-full cursor-pointer rounded-xl bg-sky-300 px-4 py-3 text-sm font-bold text-slate-950 transition-colors hover:bg-sky-200">Додати коментар</button>
+                    <button type="submit" class="w-full cursor-pointer rounded-xl bg-sky-300 px-4 py-3 text-sm font-bold text-slate-950 transition-colors hover:bg-sky-200 disabled:cursor-not-allowed disabled:opacity-50">Додати коментар</button>
                   </fieldset>
                   <p id="project-zomboid-message" data-comment-message role="status" aria-live="polite" class="mt-3 text-xs leading-5 text-muted"></p>
                 </form>
