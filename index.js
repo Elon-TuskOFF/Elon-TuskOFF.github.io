@@ -1,4 +1,5 @@
 import { WALLPAPERS } from "./wallpapers.js";
+import { initializeComments } from "./comments.js";
 
 const WALLPAPER_INTERVAL = 7_000;
 const FADE_DURATION = 500;
@@ -116,3 +117,5 @@ function initializeDropdowns() {
 initializeWallpapers();
 initializeLogo();
 initializeDropdowns();
+
+initializeComments();

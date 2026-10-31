@@ -29,11 +29,17 @@ The first wallpaper displays without JavaScript. With JavaScript enabled, wallpa
 
 ## Server information
 
-Server descriptions and availability are maintained manually in `index.html`. The Minecraft card is a static article; there are no status API URLs, API requests, polling timers, player counts, or player-list panels. Visitors can check current availability in Discord. BlueMap remains a normal external link.
+Server descriptions and availability are maintained manually in `index.html`. The catalog contains GTNH, Hytale, and Project Zomboid. The Create Modpack card has been removed. There are no status API URLs, API requests, polling timers, player counts, or player-list panels. Visitors can check current availability in Discord. BlueMap remains a normal external link.
+
+## Comments
+
+Each server card has a native expandable comments panel. `comments.js` handles form submission, validates a name (1–60 characters) and message (1–1000 characters), builds comment elements with `createElement`/`textContent`, and updates the count without reloading. Comments are kept separately for each server in browser `localStorage`. They are local to that browser, are never sent to a server, and are not shared with other visitors. The panel explains this limitation.
+
+If storage is blocked or full, comments still work for the current page and an inline message explains that they could not be saved. Malformed stored entries are ignored. The form stays disabled without JavaScript; native expansion, catalog navigation, and the rest of the site remain usable.
 
 ## GitHub Pages
 
-Commit `index.html`, `index.js`, `index.css`, `wallpapers.js`, and the referenced image assets. The generated CSS and images are included in the repository, so the existing GitHub Pages static publishing setup does not need to change. To change the generated assets, run `npm ci && npm run build` and commit the results.
+Commit `index.html`, `index.js`, `comments.js`, `index.css`, `wallpapers.js`, and the referenced image assets. The generated CSS and images are included in the repository, so the existing GitHub Pages static publishing setup does not need to change. To change the generated assets, run `npm ci && npm run build` and commit the results.
 
 This project was made by a human and AI. Feel free to use or modify any part of this code.
 
